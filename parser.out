@@ -1,0 +1,3467 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> STARTER
+Rule 1     STARTER -> INSTRUCTION_BLOCK
+Rule 2     STARTER -> NEWLINE INSTRUCTION_BLOCK
+Rule 3     INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK INST NEWLINE
+Rule 4     INSTRUCTION_BLOCK -> INST NEWLINE
+Rule 5     INSTRUCTION_BLOCK -> IF_CLAUSE
+Rule 6     INSTRUCTION_BLOCK -> WHILE_INSTRUCTION
+Rule 7     INSTRUCTION_BLOCK -> FOR_INSTRUCTION
+Rule 8     INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK IF_CLAUSE
+Rule 9     INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK WHILE_INSTRUCTION
+Rule 10    INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK FOR_INSTRUCTION
+Rule 11    INST -> DECLARATION
+Rule 12    INST -> AFFECT
+Rule 13    INST -> AFFECT_COND
+Rule 14    INST -> INCR
+Rule 15    INST -> DECR
+Rule 16    INST -> COMMENT
+Rule 17    INCR -> IDF INC integer_value
+Rule 18    DECR -> IDF DEC integer_value
+Rule 19    AFFECT -> IDF EQUAL EXPR
+Rule 20    AFFECT -> IDF EQUAL character_value
+Rule 21    DECLARATION -> TYPE AFFECT
+Rule 22    DECLARATION -> DECLARATION_MULTIPLE
+Rule 23    DECLARATION_MULTIPLE -> TYPE IDF
+Rule 24    DECLARATION_MULTIPLE -> DECLARATION_MULTIPLE COMMA IDF
+Rule 25    DECLARATION -> ARRAY_DECLARATION
+Rule 26    ARRAY_DECLARATION -> TYPE IDF LBRACKET integer_value RBRACKET
+Rule 27    TYPE -> INTEGER
+Rule 28    TYPE -> NUMERIC
+Rule 29    TYPE -> CHARACTER
+Rule 30    TYPE -> LOGICAL
+Rule 31    EXPR -> ARITHMETICAL_EXPRESSION
+Rule 32    EXPR -> COMPARE_EXPRESSION
+Rule 33    EXPR -> LOGICAL_EXPRESSION
+Rule 34    ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION
+Rule 35    ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION
+Rule 36    ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION
+Rule 37    ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION
+Rule 38    ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION
+Rule 39    ARITHMETICAL_EXPRESSION -> VALUE
+Rule 40    ARITHMETICAL_EXPRESSION -> IDF
+Rule 41    ARITHMETICAL_EXPRESSION -> IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET
+Rule 42    ARITHMETICAL_EXPRESSION -> LPAREN ARITHMETICAL_EXPRESSION RPAREN
+Rule 43    COMPARE_EXPRESSION -> ARITHMETICAL_EXPRESSION COMPARISON_OPERATOR ARITHMETICAL_EXPRESSION
+Rule 44    COMPARE_EXPRESSION -> LPAREN COMPARE_EXPRESSION RPAREN
+Rule 45    LOGICAL_EXPRESSION -> EXPR AND EXPR
+Rule 46    LOGICAL_EXPRESSION -> EXPR OR EXPR
+Rule 47    LOGICAL_EXPRESSION -> LOGICAL_VALUE
+Rule 48    LOGICAL_EXPRESSION -> LPAREN LOGICAL_EXPRESSION RPAREN
+Rule 49    COMPARISON_OPERATOR -> SUP
+Rule 50    COMPARISON_OPERATOR -> INF
+Rule 51    COMPARISON_OPERATOR -> SUPEQUAL
+Rule 52    COMPARISON_OPERATOR -> INFEQUAL
+Rule 53    COMPARISON_OPERATOR -> EEQUAL
+Rule 54    COMPARISON_OPERATOR -> NOTEQUAL
+Rule 55    LOGICAL_VALUE -> TRUE
+Rule 56    LOGICAL_VALUE -> FALSE
+Rule 57    VALUE -> integer_value
+Rule 58    VALUE -> numeric_value
+Rule 59    AFFECT_COND -> AFF_COND_EXP EXPR RPAREN
+Rule 60    AFF_COND_EXP -> AFF_COND_DEB EXPR COMMA
+Rule 61    AFF_COND_DEB -> IDF EQUAL LPAREN EXPR COMMA
+Rule 62    IF_CLAUSE -> IF_INSTRUCTION NEWLINE
+Rule 63    IF_CLAUSE -> IF_ELSE_BLOC INSTRUCTION_BLOCK RACCO NEWLINE
+Rule 64    IF_INSTRUCTION -> IF_CONDITION NEWLINE LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+Rule 65    IF_INSTRUCTION -> ELSE_IF_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+Rule 66    IF_CONDITION -> IF LPAREN EXPR RPAREN
+Rule 67    IF_ELSE_BLOC -> IF_INSTRUCTION NEWLINE ELSE NEWLINE LACCO NEWLINE
+Rule 68    ELSE_IF -> IF_INSTRUCTION NEWLINE ELSE IF
+Rule 69    ELSE_IF_CONDITION -> ELSE_IF LPAREN EXPR RPAREN NEWLINE
+Rule 70    WHILE_INSTRUCTION -> WHILE_COND LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+Rule 71    WHILE_COND -> WHILE_START LPAREN EXPR RPAREN NEWLINE
+Rule 72    WHILE_START -> WHILE
+Rule 73    FOR_INSTRUCTION -> FOR_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+Rule 74    FOR_CONDITION -> FOR_START for_int RPAREN NEWLINE
+Rule 75    FOR_START -> FOR LPAREN IDF IN for_int COLON
+Rule 76    for_int -> IDF
+Rule 77    for_int -> integer_value
+
+Terminals, with rules where they appear
+
+ADD                  : 34
+AND                  : 45
+CHARACTER            : 29
+COLON                : 75
+COMMA                : 24 60 61
+COMMENT              : 16
+DEC                  : 18
+DIV                  : 37
+EEQUAL               : 53
+ELSE                 : 67 68
+EQUAL                : 19 20 61
+FALSE                : 56
+FOR                  : 75
+IDF                  : 17 18 19 20 23 24 26 40 41 61 75 76
+IF                   : 66 68
+IN                   : 75
+INC                  : 17
+INF                  : 50
+INFEQUAL             : 52
+INTEGER              : 27
+LACCO                : 64 65 67 70 73
+LBRACKET             : 26 41
+LOGICAL              : 30
+LPAREN               : 42 44 48 61 66 69 71 75
+MOD                  : 38
+MUL                  : 36
+NEWLINE              : 2 3 4 62 63 64 64 65 67 67 67 68 69 70 70 71 73 73 74
+NOTEQUAL             : 54
+NUMERIC              : 28
+OR                   : 46
+RACCO                : 63 64 65 70 73
+RBRACKET             : 26 41
+RPAREN               : 42 44 48 59 66 69 71 74
+SUB                  : 35
+SUP                  : 49
+SUPEQUAL             : 51
+TRUE                 : 55
+WHILE                : 72
+character_value      : 20
+error                : 
+integer_value        : 17 18 26 57 77
+numeric_value        : 58
+
+Nonterminals, with rules where they appear
+
+AFFECT               : 12 21
+AFFECT_COND          : 13
+AFF_COND_DEB         : 60
+AFF_COND_EXP         : 59
+ARITHMETICAL_EXPRESSION : 31 34 34 35 35 36 36 37 37 38 38 41 42 43 43
+ARRAY_DECLARATION    : 25
+COMPARE_EXPRESSION   : 32 44
+COMPARISON_OPERATOR  : 43
+DECLARATION          : 11
+DECLARATION_MULTIPLE : 22 24
+DECR                 : 15
+ELSE_IF              : 69
+ELSE_IF_CONDITION    : 65
+EXPR                 : 19 45 45 46 46 59 60 61 66 69 71
+FOR_CONDITION        : 73
+FOR_INSTRUCTION      : 7 10
+FOR_START            : 74
+IF_CLAUSE            : 5 8
+IF_CONDITION         : 64
+IF_ELSE_BLOC         : 63
+IF_INSTRUCTION       : 62 67 68
+INCR                 : 14
+INST                 : 3 4
+INSTRUCTION_BLOCK    : 1 2 3 8 9 10 63 64 65 70 73
+LOGICAL_EXPRESSION   : 33 48
+LOGICAL_VALUE        : 47
+STARTER              : 0
+TYPE                 : 21 23 26
+VALUE                : 39
+WHILE_COND           : 70
+WHILE_INSTRUCTION    : 6 9
+WHILE_START          : 71
+for_int              : 74 75
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . STARTER
+    (1) STARTER -> . INSTRUCTION_BLOCK
+    (2) STARTER -> . NEWLINE INSTRUCTION_BLOCK
+    (3) INSTRUCTION_BLOCK -> . INSTRUCTION_BLOCK INST NEWLINE
+    (4) INSTRUCTION_BLOCK -> . INST NEWLINE
+    (5) INSTRUCTION_BLOCK -> . IF_CLAUSE
+    (6) INSTRUCTION_BLOCK -> . WHILE_INSTRUCTION
+    (7) INSTRUCTION_BLOCK -> . FOR_INSTRUCTION
+    (8) INSTRUCTION_BLOCK -> . INSTRUCTION_BLOCK IF_CLAUSE
+    (9) INSTRUCTION_BLOCK -> . INSTRUCTION_BLOCK WHILE_INSTRUCTION
+    (10) INSTRUCTION_BLOCK -> . INSTRUCTION_BLOCK FOR_INSTRUCTION
+    (11) INST -> . DECLARATION
+    (12) INST -> . AFFECT
+    (13) INST -> . AFFECT_COND
+    (14) INST -> . INCR
+    (15) INST -> . DECR
+    (16) INST -> . COMMENT
+    (62) IF_CLAUSE -> . IF_INSTRUCTION NEWLINE
+    (63) IF_CLAUSE -> . IF_ELSE_BLOC INSTRUCTION_BLOCK RACCO NEWLINE
+    (70) WHILE_INSTRUCTION -> . WHILE_COND LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+    (73) FOR_INSTRUCTION -> . FOR_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+    (21) DECLARATION -> . TYPE AFFECT
+    (22) DECLARATION -> . DECLARATION_MULTIPLE
+    (25) DECLARATION -> . ARRAY_DECLARATION
+    (19) AFFECT -> . IDF EQUAL EXPR
+    (20) AFFECT -> . IDF EQUAL character_value
+    (59) AFFECT_COND -> . AFF_COND_EXP EXPR RPAREN
+    (17) INCR -> . IDF INC integer_value
+    (18) DECR -> . IDF DEC integer_value
+    (64) IF_INSTRUCTION -> . IF_CONDITION NEWLINE LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+    (65) IF_INSTRUCTION -> . ELSE_IF_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+    (67) IF_ELSE_BLOC -> . IF_INSTRUCTION NEWLINE ELSE NEWLINE LACCO NEWLINE
+    (71) WHILE_COND -> . WHILE_START LPAREN EXPR RPAREN NEWLINE
+    (74) FOR_CONDITION -> . FOR_START for_int RPAREN NEWLINE
+    (27) TYPE -> . INTEGER
+    (28) TYPE -> . NUMERIC
+    (29) TYPE -> . CHARACTER
+    (30) TYPE -> . LOGICAL
+    (23) DECLARATION_MULTIPLE -> . TYPE IDF
+    (24) DECLARATION_MULTIPLE -> . DECLARATION_MULTIPLE COMMA IDF
+    (26) ARRAY_DECLARATION -> . TYPE IDF LBRACKET integer_value RBRACKET
+    (60) AFF_COND_EXP -> . AFF_COND_DEB EXPR COMMA
+    (66) IF_CONDITION -> . IF LPAREN EXPR RPAREN
+    (69) ELSE_IF_CONDITION -> . ELSE_IF LPAREN EXPR RPAREN NEWLINE
+    (72) WHILE_START -> . WHILE
+    (75) FOR_START -> . FOR LPAREN IDF IN for_int COLON
+    (61) AFF_COND_DEB -> . IDF EQUAL LPAREN EXPR COMMA
+    (68) ELSE_IF -> . IF_INSTRUCTION NEWLINE ELSE IF
+
+    NEWLINE         shift and go to state 3
+    COMMENT         shift and go to state 13
+    IDF             shift and go to state 21
+    INTEGER         shift and go to state 27
+    NUMERIC         shift and go to state 28
+    CHARACTER       shift and go to state 29
+    LOGICAL         shift and go to state 30
+    IF              shift and go to state 32
+    WHILE           shift and go to state 34
+    FOR             shift and go to state 35
+
+    STARTER                        shift and go to state 1
+    INSTRUCTION_BLOCK              shift and go to state 2
+    INST                           shift and go to state 4
+    IF_CLAUSE                      shift and go to state 5
+    WHILE_INSTRUCTION              shift and go to state 6
+    FOR_INSTRUCTION                shift and go to state 7
+    DECLARATION                    shift and go to state 8
+    AFFECT                         shift and go to state 9
+    AFFECT_COND                    shift and go to state 10
+    INCR                           shift and go to state 11
+    DECR                           shift and go to state 12
+    IF_INSTRUCTION                 shift and go to state 14
+    IF_ELSE_BLOC                   shift and go to state 15
+    WHILE_COND                     shift and go to state 16
+    FOR_CONDITION                  shift and go to state 17
+    TYPE                           shift and go to state 18
+    DECLARATION_MULTIPLE           shift and go to state 19
+    ARRAY_DECLARATION              shift and go to state 20
+    AFF_COND_EXP                   shift and go to state 22
+    IF_CONDITION                   shift and go to state 23
+    ELSE_IF_CONDITION              shift and go to state 24
+    WHILE_START                    shift and go to state 25
+    FOR_START                      shift and go to state 26
+    AFF_COND_DEB                   shift and go to state 31
+    ELSE_IF                        shift and go to state 33
+
+state 1
+
+    (0) S' -> STARTER .
+
+
+
+state 2
+
+    (1) STARTER -> INSTRUCTION_BLOCK .
+    (3) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK . INST NEWLINE
+    (8) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK . IF_CLAUSE
+    (9) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK . WHILE_INSTRUCTION
+    (10) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK . FOR_INSTRUCTION
+    (11) INST -> . DECLARATION
+    (12) INST -> . AFFECT
+    (13) INST -> . AFFECT_COND
+    (14) INST -> . INCR
+    (15) INST -> . DECR
+    (16) INST -> . COMMENT
+    (62) IF_CLAUSE -> . IF_INSTRUCTION NEWLINE
+    (63) IF_CLAUSE -> . IF_ELSE_BLOC INSTRUCTION_BLOCK RACCO NEWLINE
+    (70) WHILE_INSTRUCTION -> . WHILE_COND LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+    (73) FOR_INSTRUCTION -> . FOR_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+    (21) DECLARATION -> . TYPE AFFECT
+    (22) DECLARATION -> . DECLARATION_MULTIPLE
+    (25) DECLARATION -> . ARRAY_DECLARATION
+    (19) AFFECT -> . IDF EQUAL EXPR
+    (20) AFFECT -> . IDF EQUAL character_value
+    (59) AFFECT_COND -> . AFF_COND_EXP EXPR RPAREN
+    (17) INCR -> . IDF INC integer_value
+    (18) DECR -> . IDF DEC integer_value
+    (64) IF_INSTRUCTION -> . IF_CONDITION NEWLINE LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+    (65) IF_INSTRUCTION -> . ELSE_IF_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+    (67) IF_ELSE_BLOC -> . IF_INSTRUCTION NEWLINE ELSE NEWLINE LACCO NEWLINE
+    (71) WHILE_COND -> . WHILE_START LPAREN EXPR RPAREN NEWLINE
+    (74) FOR_CONDITION -> . FOR_START for_int RPAREN NEWLINE
+    (27) TYPE -> . INTEGER
+    (28) TYPE -> . NUMERIC
+    (29) TYPE -> . CHARACTER
+    (30) TYPE -> . LOGICAL
+    (23) DECLARATION_MULTIPLE -> . TYPE IDF
+    (24) DECLARATION_MULTIPLE -> . DECLARATION_MULTIPLE COMMA IDF
+    (26) ARRAY_DECLARATION -> . TYPE IDF LBRACKET integer_value RBRACKET
+    (60) AFF_COND_EXP -> . AFF_COND_DEB EXPR COMMA
+    (66) IF_CONDITION -> . IF LPAREN EXPR RPAREN
+    (69) ELSE_IF_CONDITION -> . ELSE_IF LPAREN EXPR RPAREN NEWLINE
+    (72) WHILE_START -> . WHILE
+    (75) FOR_START -> . FOR LPAREN IDF IN for_int COLON
+    (61) AFF_COND_DEB -> . IDF EQUAL LPAREN EXPR COMMA
+    (68) ELSE_IF -> . IF_INSTRUCTION NEWLINE ELSE IF
+
+    $end            reduce using rule 1 (STARTER -> INSTRUCTION_BLOCK .)
+    COMMENT         shift and go to state 13
+    IDF             shift and go to state 21
+    INTEGER         shift and go to state 27
+    NUMERIC         shift and go to state 28
+    CHARACTER       shift and go to state 29
+    LOGICAL         shift and go to state 30
+    IF              shift and go to state 32
+    WHILE           shift and go to state 34
+    FOR             shift and go to state 35
+
+    INST                           shift and go to state 36
+    IF_CLAUSE                      shift and go to state 37
+    WHILE_INSTRUCTION              shift and go to state 38
+    FOR_INSTRUCTION                shift and go to state 39
+    DECLARATION                    shift and go to state 8
+    AFFECT                         shift and go to state 9
+    AFFECT_COND                    shift and go to state 10
+    INCR                           shift and go to state 11
+    DECR                           shift and go to state 12
+    IF_INSTRUCTION                 shift and go to state 14
+    IF_ELSE_BLOC                   shift and go to state 15
+    WHILE_COND                     shift and go to state 16
+    FOR_CONDITION                  shift and go to state 17
+    TYPE                           shift and go to state 18
+    DECLARATION_MULTIPLE           shift and go to state 19
+    ARRAY_DECLARATION              shift and go to state 20
+    AFF_COND_EXP                   shift and go to state 22
+    IF_CONDITION                   shift and go to state 23
+    ELSE_IF_CONDITION              shift and go to state 24
+    WHILE_START                    shift and go to state 25
+    FOR_START                      shift and go to state 26
+    AFF_COND_DEB                   shift and go to state 31
+    ELSE_IF                        shift and go to state 33
+
+state 3
+
+    (2) STARTER -> NEWLINE . INSTRUCTION_BLOCK
+    (3) INSTRUCTION_BLOCK -> . INSTRUCTION_BLOCK INST NEWLINE
+    (4) INSTRUCTION_BLOCK -> . INST NEWLINE
+    (5) INSTRUCTION_BLOCK -> . IF_CLAUSE
+    (6) INSTRUCTION_BLOCK -> . WHILE_INSTRUCTION
+    (7) INSTRUCTION_BLOCK -> . FOR_INSTRUCTION
+    (8) INSTRUCTION_BLOCK -> . INSTRUCTION_BLOCK IF_CLAUSE
+    (9) INSTRUCTION_BLOCK -> . INSTRUCTION_BLOCK WHILE_INSTRUCTION
+    (10) INSTRUCTION_BLOCK -> . INSTRUCTION_BLOCK FOR_INSTRUCTION
+    (11) INST -> . DECLARATION
+    (12) INST -> . AFFECT
+    (13) INST -> . AFFECT_COND
+    (14) INST -> . INCR
+    (15) INST -> . DECR
+    (16) INST -> . COMMENT
+    (62) IF_CLAUSE -> . IF_INSTRUCTION NEWLINE
+    (63) IF_CLAUSE -> . IF_ELSE_BLOC INSTRUCTION_BLOCK RACCO NEWLINE
+    (70) WHILE_INSTRUCTION -> . WHILE_COND LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+    (73) FOR_INSTRUCTION -> . FOR_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+    (21) DECLARATION -> . TYPE AFFECT
+    (22) DECLARATION -> . DECLARATION_MULTIPLE
+    (25) DECLARATION -> . ARRAY_DECLARATION
+    (19) AFFECT -> . IDF EQUAL EXPR
+    (20) AFFECT -> . IDF EQUAL character_value
+    (59) AFFECT_COND -> . AFF_COND_EXP EXPR RPAREN
+    (17) INCR -> . IDF INC integer_value
+    (18) DECR -> . IDF DEC integer_value
+    (64) IF_INSTRUCTION -> . IF_CONDITION NEWLINE LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+    (65) IF_INSTRUCTION -> . ELSE_IF_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+    (67) IF_ELSE_BLOC -> . IF_INSTRUCTION NEWLINE ELSE NEWLINE LACCO NEWLINE
+    (71) WHILE_COND -> . WHILE_START LPAREN EXPR RPAREN NEWLINE
+    (74) FOR_CONDITION -> . FOR_START for_int RPAREN NEWLINE
+    (27) TYPE -> . INTEGER
+    (28) TYPE -> . NUMERIC
+    (29) TYPE -> . CHARACTER
+    (30) TYPE -> . LOGICAL
+    (23) DECLARATION_MULTIPLE -> . TYPE IDF
+    (24) DECLARATION_MULTIPLE -> . DECLARATION_MULTIPLE COMMA IDF
+    (26) ARRAY_DECLARATION -> . TYPE IDF LBRACKET integer_value RBRACKET
+    (60) AFF_COND_EXP -> . AFF_COND_DEB EXPR COMMA
+    (66) IF_CONDITION -> . IF LPAREN EXPR RPAREN
+    (69) ELSE_IF_CONDITION -> . ELSE_IF LPAREN EXPR RPAREN NEWLINE
+    (72) WHILE_START -> . WHILE
+    (75) FOR_START -> . FOR LPAREN IDF IN for_int COLON
+    (61) AFF_COND_DEB -> . IDF EQUAL LPAREN EXPR COMMA
+    (68) ELSE_IF -> . IF_INSTRUCTION NEWLINE ELSE IF
+
+    COMMENT         shift and go to state 13
+    IDF             shift and go to state 21
+    INTEGER         shift and go to state 27
+    NUMERIC         shift and go to state 28
+    CHARACTER       shift and go to state 29
+    LOGICAL         shift and go to state 30
+    IF              shift and go to state 32
+    WHILE           shift and go to state 34
+    FOR             shift and go to state 35
+
+    INSTRUCTION_BLOCK              shift and go to state 40
+    INST                           shift and go to state 4
+    IF_CLAUSE                      shift and go to state 5
+    WHILE_INSTRUCTION              shift and go to state 6
+    FOR_INSTRUCTION                shift and go to state 7
+    DECLARATION                    shift and go to state 8
+    AFFECT                         shift and go to state 9
+    AFFECT_COND                    shift and go to state 10
+    INCR                           shift and go to state 11
+    DECR                           shift and go to state 12
+    IF_INSTRUCTION                 shift and go to state 14
+    IF_ELSE_BLOC                   shift and go to state 15
+    WHILE_COND                     shift and go to state 16
+    FOR_CONDITION                  shift and go to state 17
+    TYPE                           shift and go to state 18
+    DECLARATION_MULTIPLE           shift and go to state 19
+    ARRAY_DECLARATION              shift and go to state 20
+    AFF_COND_EXP                   shift and go to state 22
+    IF_CONDITION                   shift and go to state 23
+    ELSE_IF_CONDITION              shift and go to state 24
+    WHILE_START                    shift and go to state 25
+    FOR_START                      shift and go to state 26
+    AFF_COND_DEB                   shift and go to state 31
+    ELSE_IF                        shift and go to state 33
+
+state 4
+
+    (4) INSTRUCTION_BLOCK -> INST . NEWLINE
+
+    NEWLINE         shift and go to state 41
+
+
+state 5
+
+    (5) INSTRUCTION_BLOCK -> IF_CLAUSE .
+
+    COMMENT         reduce using rule 5 (INSTRUCTION_BLOCK -> IF_CLAUSE .)
+    IDF             reduce using rule 5 (INSTRUCTION_BLOCK -> IF_CLAUSE .)
+    INTEGER         reduce using rule 5 (INSTRUCTION_BLOCK -> IF_CLAUSE .)
+    NUMERIC         reduce using rule 5 (INSTRUCTION_BLOCK -> IF_CLAUSE .)
+    CHARACTER       reduce using rule 5 (INSTRUCTION_BLOCK -> IF_CLAUSE .)
+    LOGICAL         reduce using rule 5 (INSTRUCTION_BLOCK -> IF_CLAUSE .)
+    IF              reduce using rule 5 (INSTRUCTION_BLOCK -> IF_CLAUSE .)
+    WHILE           reduce using rule 5 (INSTRUCTION_BLOCK -> IF_CLAUSE .)
+    FOR             reduce using rule 5 (INSTRUCTION_BLOCK -> IF_CLAUSE .)
+    $end            reduce using rule 5 (INSTRUCTION_BLOCK -> IF_CLAUSE .)
+    RACCO           reduce using rule 5 (INSTRUCTION_BLOCK -> IF_CLAUSE .)
+
+
+state 6
+
+    (6) INSTRUCTION_BLOCK -> WHILE_INSTRUCTION .
+
+    COMMENT         reduce using rule 6 (INSTRUCTION_BLOCK -> WHILE_INSTRUCTION .)
+    IDF             reduce using rule 6 (INSTRUCTION_BLOCK -> WHILE_INSTRUCTION .)
+    INTEGER         reduce using rule 6 (INSTRUCTION_BLOCK -> WHILE_INSTRUCTION .)
+    NUMERIC         reduce using rule 6 (INSTRUCTION_BLOCK -> WHILE_INSTRUCTION .)
+    CHARACTER       reduce using rule 6 (INSTRUCTION_BLOCK -> WHILE_INSTRUCTION .)
+    LOGICAL         reduce using rule 6 (INSTRUCTION_BLOCK -> WHILE_INSTRUCTION .)
+    IF              reduce using rule 6 (INSTRUCTION_BLOCK -> WHILE_INSTRUCTION .)
+    WHILE           reduce using rule 6 (INSTRUCTION_BLOCK -> WHILE_INSTRUCTION .)
+    FOR             reduce using rule 6 (INSTRUCTION_BLOCK -> WHILE_INSTRUCTION .)
+    $end            reduce using rule 6 (INSTRUCTION_BLOCK -> WHILE_INSTRUCTION .)
+    RACCO           reduce using rule 6 (INSTRUCTION_BLOCK -> WHILE_INSTRUCTION .)
+
+
+state 7
+
+    (7) INSTRUCTION_BLOCK -> FOR_INSTRUCTION .
+
+    COMMENT         reduce using rule 7 (INSTRUCTION_BLOCK -> FOR_INSTRUCTION .)
+    IDF             reduce using rule 7 (INSTRUCTION_BLOCK -> FOR_INSTRUCTION .)
+    INTEGER         reduce using rule 7 (INSTRUCTION_BLOCK -> FOR_INSTRUCTION .)
+    NUMERIC         reduce using rule 7 (INSTRUCTION_BLOCK -> FOR_INSTRUCTION .)
+    CHARACTER       reduce using rule 7 (INSTRUCTION_BLOCK -> FOR_INSTRUCTION .)
+    LOGICAL         reduce using rule 7 (INSTRUCTION_BLOCK -> FOR_INSTRUCTION .)
+    IF              reduce using rule 7 (INSTRUCTION_BLOCK -> FOR_INSTRUCTION .)
+    WHILE           reduce using rule 7 (INSTRUCTION_BLOCK -> FOR_INSTRUCTION .)
+    FOR             reduce using rule 7 (INSTRUCTION_BLOCK -> FOR_INSTRUCTION .)
+    $end            reduce using rule 7 (INSTRUCTION_BLOCK -> FOR_INSTRUCTION .)
+    RACCO           reduce using rule 7 (INSTRUCTION_BLOCK -> FOR_INSTRUCTION .)
+
+
+state 8
+
+    (11) INST -> DECLARATION .
+
+    NEWLINE         reduce using rule 11 (INST -> DECLARATION .)
+
+
+state 9
+
+    (12) INST -> AFFECT .
+
+    NEWLINE         reduce using rule 12 (INST -> AFFECT .)
+
+
+state 10
+
+    (13) INST -> AFFECT_COND .
+
+    NEWLINE         reduce using rule 13 (INST -> AFFECT_COND .)
+
+
+state 11
+
+    (14) INST -> INCR .
+
+    NEWLINE         reduce using rule 14 (INST -> INCR .)
+
+
+state 12
+
+    (15) INST -> DECR .
+
+    NEWLINE         reduce using rule 15 (INST -> DECR .)
+
+
+state 13
+
+    (16) INST -> COMMENT .
+
+    NEWLINE         reduce using rule 16 (INST -> COMMENT .)
+
+
+state 14
+
+    (62) IF_CLAUSE -> IF_INSTRUCTION . NEWLINE
+    (67) IF_ELSE_BLOC -> IF_INSTRUCTION . NEWLINE ELSE NEWLINE LACCO NEWLINE
+    (68) ELSE_IF -> IF_INSTRUCTION . NEWLINE ELSE IF
+
+    NEWLINE         shift and go to state 42
+
+
+state 15
+
+    (63) IF_CLAUSE -> IF_ELSE_BLOC . INSTRUCTION_BLOCK RACCO NEWLINE
+    (3) INSTRUCTION_BLOCK -> . INSTRUCTION_BLOCK INST NEWLINE
+    (4) INSTRUCTION_BLOCK -> . INST NEWLINE
+    (5) INSTRUCTION_BLOCK -> . IF_CLAUSE
+    (6) INSTRUCTION_BLOCK -> . WHILE_INSTRUCTION
+    (7) INSTRUCTION_BLOCK -> . FOR_INSTRUCTION
+    (8) INSTRUCTION_BLOCK -> . INSTRUCTION_BLOCK IF_CLAUSE
+    (9) INSTRUCTION_BLOCK -> . INSTRUCTION_BLOCK WHILE_INSTRUCTION
+    (10) INSTRUCTION_BLOCK -> . INSTRUCTION_BLOCK FOR_INSTRUCTION
+    (11) INST -> . DECLARATION
+    (12) INST -> . AFFECT
+    (13) INST -> . AFFECT_COND
+    (14) INST -> . INCR
+    (15) INST -> . DECR
+    (16) INST -> . COMMENT
+    (62) IF_CLAUSE -> . IF_INSTRUCTION NEWLINE
+    (63) IF_CLAUSE -> . IF_ELSE_BLOC INSTRUCTION_BLOCK RACCO NEWLINE
+    (70) WHILE_INSTRUCTION -> . WHILE_COND LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+    (73) FOR_INSTRUCTION -> . FOR_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+    (21) DECLARATION -> . TYPE AFFECT
+    (22) DECLARATION -> . DECLARATION_MULTIPLE
+    (25) DECLARATION -> . ARRAY_DECLARATION
+    (19) AFFECT -> . IDF EQUAL EXPR
+    (20) AFFECT -> . IDF EQUAL character_value
+    (59) AFFECT_COND -> . AFF_COND_EXP EXPR RPAREN
+    (17) INCR -> . IDF INC integer_value
+    (18) DECR -> . IDF DEC integer_value
+    (64) IF_INSTRUCTION -> . IF_CONDITION NEWLINE LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+    (65) IF_INSTRUCTION -> . ELSE_IF_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+    (67) IF_ELSE_BLOC -> . IF_INSTRUCTION NEWLINE ELSE NEWLINE LACCO NEWLINE
+    (71) WHILE_COND -> . WHILE_START LPAREN EXPR RPAREN NEWLINE
+    (74) FOR_CONDITION -> . FOR_START for_int RPAREN NEWLINE
+    (27) TYPE -> . INTEGER
+    (28) TYPE -> . NUMERIC
+    (29) TYPE -> . CHARACTER
+    (30) TYPE -> . LOGICAL
+    (23) DECLARATION_MULTIPLE -> . TYPE IDF
+    (24) DECLARATION_MULTIPLE -> . DECLARATION_MULTIPLE COMMA IDF
+    (26) ARRAY_DECLARATION -> . TYPE IDF LBRACKET integer_value RBRACKET
+    (60) AFF_COND_EXP -> . AFF_COND_DEB EXPR COMMA
+    (66) IF_CONDITION -> . IF LPAREN EXPR RPAREN
+    (69) ELSE_IF_CONDITION -> . ELSE_IF LPAREN EXPR RPAREN NEWLINE
+    (72) WHILE_START -> . WHILE
+    (75) FOR_START -> . FOR LPAREN IDF IN for_int COLON
+    (61) AFF_COND_DEB -> . IDF EQUAL LPAREN EXPR COMMA
+    (68) ELSE_IF -> . IF_INSTRUCTION NEWLINE ELSE IF
+
+    COMMENT         shift and go to state 13
+    IDF             shift and go to state 21
+    INTEGER         shift and go to state 27
+    NUMERIC         shift and go to state 28
+    CHARACTER       shift and go to state 29
+    LOGICAL         shift and go to state 30
+    IF              shift and go to state 32
+    WHILE           shift and go to state 34
+    FOR             shift and go to state 35
+
+    IF_ELSE_BLOC                   shift and go to state 15
+    INSTRUCTION_BLOCK              shift and go to state 43
+    INST                           shift and go to state 4
+    IF_CLAUSE                      shift and go to state 5
+    WHILE_INSTRUCTION              shift and go to state 6
+    FOR_INSTRUCTION                shift and go to state 7
+    DECLARATION                    shift and go to state 8
+    AFFECT                         shift and go to state 9
+    AFFECT_COND                    shift and go to state 10
+    INCR                           shift and go to state 11
+    DECR                           shift and go to state 12
+    IF_INSTRUCTION                 shift and go to state 14
+    WHILE_COND                     shift and go to state 16
+    FOR_CONDITION                  shift and go to state 17
+    TYPE                           shift and go to state 18
+    DECLARATION_MULTIPLE           shift and go to state 19
+    ARRAY_DECLARATION              shift and go to state 20
+    AFF_COND_EXP                   shift and go to state 22
+    IF_CONDITION                   shift and go to state 23
+    ELSE_IF_CONDITION              shift and go to state 24
+    WHILE_START                    shift and go to state 25
+    FOR_START                      shift and go to state 26
+    AFF_COND_DEB                   shift and go to state 31
+    ELSE_IF                        shift and go to state 33
+
+state 16
+
+    (70) WHILE_INSTRUCTION -> WHILE_COND . LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+
+    LACCO           shift and go to state 44
+
+
+state 17
+
+    (73) FOR_INSTRUCTION -> FOR_CONDITION . LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+
+    LACCO           shift and go to state 45
+
+
+state 18
+
+    (21) DECLARATION -> TYPE . AFFECT
+    (23) DECLARATION_MULTIPLE -> TYPE . IDF
+    (26) ARRAY_DECLARATION -> TYPE . IDF LBRACKET integer_value RBRACKET
+    (19) AFFECT -> . IDF EQUAL EXPR
+    (20) AFFECT -> . IDF EQUAL character_value
+
+    IDF             shift and go to state 47
+
+    AFFECT                         shift and go to state 46
+
+state 19
+
+    (22) DECLARATION -> DECLARATION_MULTIPLE .
+    (24) DECLARATION_MULTIPLE -> DECLARATION_MULTIPLE . COMMA IDF
+
+    NEWLINE         reduce using rule 22 (DECLARATION -> DECLARATION_MULTIPLE .)
+    COMMA           shift and go to state 48
+
+
+state 20
+
+    (25) DECLARATION -> ARRAY_DECLARATION .
+
+    NEWLINE         reduce using rule 25 (DECLARATION -> ARRAY_DECLARATION .)
+
+
+state 21
+
+    (19) AFFECT -> IDF . EQUAL EXPR
+    (20) AFFECT -> IDF . EQUAL character_value
+    (17) INCR -> IDF . INC integer_value
+    (18) DECR -> IDF . DEC integer_value
+    (61) AFF_COND_DEB -> IDF . EQUAL LPAREN EXPR COMMA
+
+    EQUAL           shift and go to state 49
+    INC             shift and go to state 50
+    DEC             shift and go to state 51
+
+
+state 22
+
+    (59) AFFECT_COND -> AFF_COND_EXP . EXPR RPAREN
+    (31) EXPR -> . ARITHMETICAL_EXPRESSION
+    (32) EXPR -> . COMPARE_EXPRESSION
+    (33) EXPR -> . LOGICAL_EXPRESSION
+    (34) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION
+    (35) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION
+    (36) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION
+    (37) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION
+    (38) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION
+    (39) ARITHMETICAL_EXPRESSION -> . VALUE
+    (40) ARITHMETICAL_EXPRESSION -> . IDF
+    (41) ARITHMETICAL_EXPRESSION -> . IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET
+    (42) ARITHMETICAL_EXPRESSION -> . LPAREN ARITHMETICAL_EXPRESSION RPAREN
+    (43) COMPARE_EXPRESSION -> . ARITHMETICAL_EXPRESSION COMPARISON_OPERATOR ARITHMETICAL_EXPRESSION
+    (44) COMPARE_EXPRESSION -> . LPAREN COMPARE_EXPRESSION RPAREN
+    (45) LOGICAL_EXPRESSION -> . EXPR AND EXPR
+    (46) LOGICAL_EXPRESSION -> . EXPR OR EXPR
+    (47) LOGICAL_EXPRESSION -> . LOGICAL_VALUE
+    (48) LOGICAL_EXPRESSION -> . LPAREN LOGICAL_EXPRESSION RPAREN
+    (57) VALUE -> . integer_value
+    (58) VALUE -> . numeric_value
+    (55) LOGICAL_VALUE -> . TRUE
+    (56) LOGICAL_VALUE -> . FALSE
+
+    IDF             shift and go to state 57
+    LPAREN          shift and go to state 58
+    integer_value   shift and go to state 60
+    numeric_value   shift and go to state 61
+    TRUE            shift and go to state 62
+    FALSE           shift and go to state 63
+
+    EXPR                           shift and go to state 52
+    ARITHMETICAL_EXPRESSION        shift and go to state 53
+    COMPARE_EXPRESSION             shift and go to state 54
+    LOGICAL_EXPRESSION             shift and go to state 55
+    VALUE                          shift and go to state 56
+    LOGICAL_VALUE                  shift and go to state 59
+
+state 23
+
+    (64) IF_INSTRUCTION -> IF_CONDITION . NEWLINE LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+
+    NEWLINE         shift and go to state 64
+
+
+state 24
+
+    (65) IF_INSTRUCTION -> ELSE_IF_CONDITION . LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+
+    LACCO           shift and go to state 65
+
+
+state 25
+
+    (71) WHILE_COND -> WHILE_START . LPAREN EXPR RPAREN NEWLINE
+
+    LPAREN          shift and go to state 66
+
+
+state 26
+
+    (74) FOR_CONDITION -> FOR_START . for_int RPAREN NEWLINE
+    (76) for_int -> . IDF
+    (77) for_int -> . integer_value
+
+    IDF             shift and go to state 68
+    integer_value   shift and go to state 69
+
+    for_int                        shift and go to state 67
+
+state 27
+
+    (27) TYPE -> INTEGER .
+
+    IDF             reduce using rule 27 (TYPE -> INTEGER .)
+
+
+state 28
+
+    (28) TYPE -> NUMERIC .
+
+    IDF             reduce using rule 28 (TYPE -> NUMERIC .)
+
+
+state 29
+
+    (29) TYPE -> CHARACTER .
+
+    IDF             reduce using rule 29 (TYPE -> CHARACTER .)
+
+
+state 30
+
+    (30) TYPE -> LOGICAL .
+
+    IDF             reduce using rule 30 (TYPE -> LOGICAL .)
+
+
+state 31
+
+    (60) AFF_COND_EXP -> AFF_COND_DEB . EXPR COMMA
+    (31) EXPR -> . ARITHMETICAL_EXPRESSION
+    (32) EXPR -> . COMPARE_EXPRESSION
+    (33) EXPR -> . LOGICAL_EXPRESSION
+    (34) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION
+    (35) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION
+    (36) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION
+    (37) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION
+    (38) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION
+    (39) ARITHMETICAL_EXPRESSION -> . VALUE
+    (40) ARITHMETICAL_EXPRESSION -> . IDF
+    (41) ARITHMETICAL_EXPRESSION -> . IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET
+    (42) ARITHMETICAL_EXPRESSION -> . LPAREN ARITHMETICAL_EXPRESSION RPAREN
+    (43) COMPARE_EXPRESSION -> . ARITHMETICAL_EXPRESSION COMPARISON_OPERATOR ARITHMETICAL_EXPRESSION
+    (44) COMPARE_EXPRESSION -> . LPAREN COMPARE_EXPRESSION RPAREN
+    (45) LOGICAL_EXPRESSION -> . EXPR AND EXPR
+    (46) LOGICAL_EXPRESSION -> . EXPR OR EXPR
+    (47) LOGICAL_EXPRESSION -> . LOGICAL_VALUE
+    (48) LOGICAL_EXPRESSION -> . LPAREN LOGICAL_EXPRESSION RPAREN
+    (57) VALUE -> . integer_value
+    (58) VALUE -> . numeric_value
+    (55) LOGICAL_VALUE -> . TRUE
+    (56) LOGICAL_VALUE -> . FALSE
+
+    IDF             shift and go to state 57
+    LPAREN          shift and go to state 58
+    integer_value   shift and go to state 60
+    numeric_value   shift and go to state 61
+    TRUE            shift and go to state 62
+    FALSE           shift and go to state 63
+
+    EXPR                           shift and go to state 70
+    ARITHMETICAL_EXPRESSION        shift and go to state 53
+    COMPARE_EXPRESSION             shift and go to state 54
+    LOGICAL_EXPRESSION             shift and go to state 55
+    VALUE                          shift and go to state 56
+    LOGICAL_VALUE                  shift and go to state 59
+
+state 32
+
+    (66) IF_CONDITION -> IF . LPAREN EXPR RPAREN
+
+    LPAREN          shift and go to state 71
+
+
+state 33
+
+    (69) ELSE_IF_CONDITION -> ELSE_IF . LPAREN EXPR RPAREN NEWLINE
+
+    LPAREN          shift and go to state 72
+
+
+state 34
+
+    (72) WHILE_START -> WHILE .
+
+    LPAREN          reduce using rule 72 (WHILE_START -> WHILE .)
+
+
+state 35
+
+    (75) FOR_START -> FOR . LPAREN IDF IN for_int COLON
+
+    LPAREN          shift and go to state 73
+
+
+state 36
+
+    (3) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK INST . NEWLINE
+
+    NEWLINE         shift and go to state 74
+
+
+state 37
+
+    (8) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK IF_CLAUSE .
+
+    COMMENT         reduce using rule 8 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK IF_CLAUSE .)
+    IDF             reduce using rule 8 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK IF_CLAUSE .)
+    INTEGER         reduce using rule 8 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK IF_CLAUSE .)
+    NUMERIC         reduce using rule 8 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK IF_CLAUSE .)
+    CHARACTER       reduce using rule 8 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK IF_CLAUSE .)
+    LOGICAL         reduce using rule 8 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK IF_CLAUSE .)
+    IF              reduce using rule 8 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK IF_CLAUSE .)
+    WHILE           reduce using rule 8 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK IF_CLAUSE .)
+    FOR             reduce using rule 8 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK IF_CLAUSE .)
+    $end            reduce using rule 8 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK IF_CLAUSE .)
+    RACCO           reduce using rule 8 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK IF_CLAUSE .)
+
+
+state 38
+
+    (9) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK WHILE_INSTRUCTION .
+
+    COMMENT         reduce using rule 9 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK WHILE_INSTRUCTION .)
+    IDF             reduce using rule 9 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK WHILE_INSTRUCTION .)
+    INTEGER         reduce using rule 9 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK WHILE_INSTRUCTION .)
+    NUMERIC         reduce using rule 9 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK WHILE_INSTRUCTION .)
+    CHARACTER       reduce using rule 9 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK WHILE_INSTRUCTION .)
+    LOGICAL         reduce using rule 9 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK WHILE_INSTRUCTION .)
+    IF              reduce using rule 9 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK WHILE_INSTRUCTION .)
+    WHILE           reduce using rule 9 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK WHILE_INSTRUCTION .)
+    FOR             reduce using rule 9 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK WHILE_INSTRUCTION .)
+    $end            reduce using rule 9 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK WHILE_INSTRUCTION .)
+    RACCO           reduce using rule 9 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK WHILE_INSTRUCTION .)
+
+
+state 39
+
+    (10) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK FOR_INSTRUCTION .
+
+    COMMENT         reduce using rule 10 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK FOR_INSTRUCTION .)
+    IDF             reduce using rule 10 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK FOR_INSTRUCTION .)
+    INTEGER         reduce using rule 10 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK FOR_INSTRUCTION .)
+    NUMERIC         reduce using rule 10 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK FOR_INSTRUCTION .)
+    CHARACTER       reduce using rule 10 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK FOR_INSTRUCTION .)
+    LOGICAL         reduce using rule 10 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK FOR_INSTRUCTION .)
+    IF              reduce using rule 10 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK FOR_INSTRUCTION .)
+    WHILE           reduce using rule 10 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK FOR_INSTRUCTION .)
+    FOR             reduce using rule 10 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK FOR_INSTRUCTION .)
+    $end            reduce using rule 10 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK FOR_INSTRUCTION .)
+    RACCO           reduce using rule 10 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK FOR_INSTRUCTION .)
+
+
+state 40
+
+    (2) STARTER -> NEWLINE INSTRUCTION_BLOCK .
+    (3) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK . INST NEWLINE
+    (8) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK . IF_CLAUSE
+    (9) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK . WHILE_INSTRUCTION
+    (10) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK . FOR_INSTRUCTION
+    (11) INST -> . DECLARATION
+    (12) INST -> . AFFECT
+    (13) INST -> . AFFECT_COND
+    (14) INST -> . INCR
+    (15) INST -> . DECR
+    (16) INST -> . COMMENT
+    (62) IF_CLAUSE -> . IF_INSTRUCTION NEWLINE
+    (63) IF_CLAUSE -> . IF_ELSE_BLOC INSTRUCTION_BLOCK RACCO NEWLINE
+    (70) WHILE_INSTRUCTION -> . WHILE_COND LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+    (73) FOR_INSTRUCTION -> . FOR_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+    (21) DECLARATION -> . TYPE AFFECT
+    (22) DECLARATION -> . DECLARATION_MULTIPLE
+    (25) DECLARATION -> . ARRAY_DECLARATION
+    (19) AFFECT -> . IDF EQUAL EXPR
+    (20) AFFECT -> . IDF EQUAL character_value
+    (59) AFFECT_COND -> . AFF_COND_EXP EXPR RPAREN
+    (17) INCR -> . IDF INC integer_value
+    (18) DECR -> . IDF DEC integer_value
+    (64) IF_INSTRUCTION -> . IF_CONDITION NEWLINE LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+    (65) IF_INSTRUCTION -> . ELSE_IF_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+    (67) IF_ELSE_BLOC -> . IF_INSTRUCTION NEWLINE ELSE NEWLINE LACCO NEWLINE
+    (71) WHILE_COND -> . WHILE_START LPAREN EXPR RPAREN NEWLINE
+    (74) FOR_CONDITION -> . FOR_START for_int RPAREN NEWLINE
+    (27) TYPE -> . INTEGER
+    (28) TYPE -> . NUMERIC
+    (29) TYPE -> . CHARACTER
+    (30) TYPE -> . LOGICAL
+    (23) DECLARATION_MULTIPLE -> . TYPE IDF
+    (24) DECLARATION_MULTIPLE -> . DECLARATION_MULTIPLE COMMA IDF
+    (26) ARRAY_DECLARATION -> . TYPE IDF LBRACKET integer_value RBRACKET
+    (60) AFF_COND_EXP -> . AFF_COND_DEB EXPR COMMA
+    (66) IF_CONDITION -> . IF LPAREN EXPR RPAREN
+    (69) ELSE_IF_CONDITION -> . ELSE_IF LPAREN EXPR RPAREN NEWLINE
+    (72) WHILE_START -> . WHILE
+    (75) FOR_START -> . FOR LPAREN IDF IN for_int COLON
+    (61) AFF_COND_DEB -> . IDF EQUAL LPAREN EXPR COMMA
+    (68) ELSE_IF -> . IF_INSTRUCTION NEWLINE ELSE IF
+
+    $end            reduce using rule 2 (STARTER -> NEWLINE INSTRUCTION_BLOCK .)
+    COMMENT         shift and go to state 13
+    IDF             shift and go to state 21
+    INTEGER         shift and go to state 27
+    NUMERIC         shift and go to state 28
+    CHARACTER       shift and go to state 29
+    LOGICAL         shift and go to state 30
+    IF              shift and go to state 32
+    WHILE           shift and go to state 34
+    FOR             shift and go to state 35
+
+    INST                           shift and go to state 36
+    IF_CLAUSE                      shift and go to state 37
+    WHILE_INSTRUCTION              shift and go to state 38
+    FOR_INSTRUCTION                shift and go to state 39
+    DECLARATION                    shift and go to state 8
+    AFFECT                         shift and go to state 9
+    AFFECT_COND                    shift and go to state 10
+    INCR                           shift and go to state 11
+    DECR                           shift and go to state 12
+    IF_INSTRUCTION                 shift and go to state 14
+    IF_ELSE_BLOC                   shift and go to state 15
+    WHILE_COND                     shift and go to state 16
+    FOR_CONDITION                  shift and go to state 17
+    TYPE                           shift and go to state 18
+    DECLARATION_MULTIPLE           shift and go to state 19
+    ARRAY_DECLARATION              shift and go to state 20
+    AFF_COND_EXP                   shift and go to state 22
+    IF_CONDITION                   shift and go to state 23
+    ELSE_IF_CONDITION              shift and go to state 24
+    WHILE_START                    shift and go to state 25
+    FOR_START                      shift and go to state 26
+    AFF_COND_DEB                   shift and go to state 31
+    ELSE_IF                        shift and go to state 33
+
+state 41
+
+    (4) INSTRUCTION_BLOCK -> INST NEWLINE .
+
+    COMMENT         reduce using rule 4 (INSTRUCTION_BLOCK -> INST NEWLINE .)
+    IDF             reduce using rule 4 (INSTRUCTION_BLOCK -> INST NEWLINE .)
+    INTEGER         reduce using rule 4 (INSTRUCTION_BLOCK -> INST NEWLINE .)
+    NUMERIC         reduce using rule 4 (INSTRUCTION_BLOCK -> INST NEWLINE .)
+    CHARACTER       reduce using rule 4 (INSTRUCTION_BLOCK -> INST NEWLINE .)
+    LOGICAL         reduce using rule 4 (INSTRUCTION_BLOCK -> INST NEWLINE .)
+    IF              reduce using rule 4 (INSTRUCTION_BLOCK -> INST NEWLINE .)
+    WHILE           reduce using rule 4 (INSTRUCTION_BLOCK -> INST NEWLINE .)
+    FOR             reduce using rule 4 (INSTRUCTION_BLOCK -> INST NEWLINE .)
+    $end            reduce using rule 4 (INSTRUCTION_BLOCK -> INST NEWLINE .)
+    RACCO           reduce using rule 4 (INSTRUCTION_BLOCK -> INST NEWLINE .)
+
+
+state 42
+
+    (62) IF_CLAUSE -> IF_INSTRUCTION NEWLINE .
+    (67) IF_ELSE_BLOC -> IF_INSTRUCTION NEWLINE . ELSE NEWLINE LACCO NEWLINE
+    (68) ELSE_IF -> IF_INSTRUCTION NEWLINE . ELSE IF
+
+    COMMENT         reduce using rule 62 (IF_CLAUSE -> IF_INSTRUCTION NEWLINE .)
+    IDF             reduce using rule 62 (IF_CLAUSE -> IF_INSTRUCTION NEWLINE .)
+    INTEGER         reduce using rule 62 (IF_CLAUSE -> IF_INSTRUCTION NEWLINE .)
+    NUMERIC         reduce using rule 62 (IF_CLAUSE -> IF_INSTRUCTION NEWLINE .)
+    CHARACTER       reduce using rule 62 (IF_CLAUSE -> IF_INSTRUCTION NEWLINE .)
+    LOGICAL         reduce using rule 62 (IF_CLAUSE -> IF_INSTRUCTION NEWLINE .)
+    IF              reduce using rule 62 (IF_CLAUSE -> IF_INSTRUCTION NEWLINE .)
+    WHILE           reduce using rule 62 (IF_CLAUSE -> IF_INSTRUCTION NEWLINE .)
+    FOR             reduce using rule 62 (IF_CLAUSE -> IF_INSTRUCTION NEWLINE .)
+    $end            reduce using rule 62 (IF_CLAUSE -> IF_INSTRUCTION NEWLINE .)
+    RACCO           reduce using rule 62 (IF_CLAUSE -> IF_INSTRUCTION NEWLINE .)
+    ELSE            shift and go to state 75
+
+
+state 43
+
+    (63) IF_CLAUSE -> IF_ELSE_BLOC INSTRUCTION_BLOCK . RACCO NEWLINE
+    (3) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK . INST NEWLINE
+    (8) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK . IF_CLAUSE
+    (9) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK . WHILE_INSTRUCTION
+    (10) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK . FOR_INSTRUCTION
+    (11) INST -> . DECLARATION
+    (12) INST -> . AFFECT
+    (13) INST -> . AFFECT_COND
+    (14) INST -> . INCR
+    (15) INST -> . DECR
+    (16) INST -> . COMMENT
+    (62) IF_CLAUSE -> . IF_INSTRUCTION NEWLINE
+    (63) IF_CLAUSE -> . IF_ELSE_BLOC INSTRUCTION_BLOCK RACCO NEWLINE
+    (70) WHILE_INSTRUCTION -> . WHILE_COND LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+    (73) FOR_INSTRUCTION -> . FOR_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+    (21) DECLARATION -> . TYPE AFFECT
+    (22) DECLARATION -> . DECLARATION_MULTIPLE
+    (25) DECLARATION -> . ARRAY_DECLARATION
+    (19) AFFECT -> . IDF EQUAL EXPR
+    (20) AFFECT -> . IDF EQUAL character_value
+    (59) AFFECT_COND -> . AFF_COND_EXP EXPR RPAREN
+    (17) INCR -> . IDF INC integer_value
+    (18) DECR -> . IDF DEC integer_value
+    (64) IF_INSTRUCTION -> . IF_CONDITION NEWLINE LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+    (65) IF_INSTRUCTION -> . ELSE_IF_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+    (67) IF_ELSE_BLOC -> . IF_INSTRUCTION NEWLINE ELSE NEWLINE LACCO NEWLINE
+    (71) WHILE_COND -> . WHILE_START LPAREN EXPR RPAREN NEWLINE
+    (74) FOR_CONDITION -> . FOR_START for_int RPAREN NEWLINE
+    (27) TYPE -> . INTEGER
+    (28) TYPE -> . NUMERIC
+    (29) TYPE -> . CHARACTER
+    (30) TYPE -> . LOGICAL
+    (23) DECLARATION_MULTIPLE -> . TYPE IDF
+    (24) DECLARATION_MULTIPLE -> . DECLARATION_MULTIPLE COMMA IDF
+    (26) ARRAY_DECLARATION -> . TYPE IDF LBRACKET integer_value RBRACKET
+    (60) AFF_COND_EXP -> . AFF_COND_DEB EXPR COMMA
+    (66) IF_CONDITION -> . IF LPAREN EXPR RPAREN
+    (69) ELSE_IF_CONDITION -> . ELSE_IF LPAREN EXPR RPAREN NEWLINE
+    (72) WHILE_START -> . WHILE
+    (75) FOR_START -> . FOR LPAREN IDF IN for_int COLON
+    (61) AFF_COND_DEB -> . IDF EQUAL LPAREN EXPR COMMA
+    (68) ELSE_IF -> . IF_INSTRUCTION NEWLINE ELSE IF
+
+    RACCO           shift and go to state 76
+    COMMENT         shift and go to state 13
+    IDF             shift and go to state 21
+    INTEGER         shift and go to state 27
+    NUMERIC         shift and go to state 28
+    CHARACTER       shift and go to state 29
+    LOGICAL         shift and go to state 30
+    IF              shift and go to state 32
+    WHILE           shift and go to state 34
+    FOR             shift and go to state 35
+
+    IF_ELSE_BLOC                   shift and go to state 15
+    INST                           shift and go to state 36
+    IF_CLAUSE                      shift and go to state 37
+    WHILE_INSTRUCTION              shift and go to state 38
+    FOR_INSTRUCTION                shift and go to state 39
+    DECLARATION                    shift and go to state 8
+    AFFECT                         shift and go to state 9
+    AFFECT_COND                    shift and go to state 10
+    INCR                           shift and go to state 11
+    DECR                           shift and go to state 12
+    IF_INSTRUCTION                 shift and go to state 14
+    WHILE_COND                     shift and go to state 16
+    FOR_CONDITION                  shift and go to state 17
+    TYPE                           shift and go to state 18
+    DECLARATION_MULTIPLE           shift and go to state 19
+    ARRAY_DECLARATION              shift and go to state 20
+    AFF_COND_EXP                   shift and go to state 22
+    IF_CONDITION                   shift and go to state 23
+    ELSE_IF_CONDITION              shift and go to state 24
+    WHILE_START                    shift and go to state 25
+    FOR_START                      shift and go to state 26
+    AFF_COND_DEB                   shift and go to state 31
+    ELSE_IF                        shift and go to state 33
+
+state 44
+
+    (70) WHILE_INSTRUCTION -> WHILE_COND LACCO . NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+
+    NEWLINE         shift and go to state 77
+
+
+state 45
+
+    (73) FOR_INSTRUCTION -> FOR_CONDITION LACCO . NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+
+    NEWLINE         shift and go to state 78
+
+
+state 46
+
+    (21) DECLARATION -> TYPE AFFECT .
+
+    NEWLINE         reduce using rule 21 (DECLARATION -> TYPE AFFECT .)
+
+
+state 47
+
+    (23) DECLARATION_MULTIPLE -> TYPE IDF .
+    (26) ARRAY_DECLARATION -> TYPE IDF . LBRACKET integer_value RBRACKET
+    (19) AFFECT -> IDF . EQUAL EXPR
+    (20) AFFECT -> IDF . EQUAL character_value
+
+    COMMA           reduce using rule 23 (DECLARATION_MULTIPLE -> TYPE IDF .)
+    NEWLINE         reduce using rule 23 (DECLARATION_MULTIPLE -> TYPE IDF .)
+    LBRACKET        shift and go to state 79
+    EQUAL           shift and go to state 80
+
+
+state 48
+
+    (24) DECLARATION_MULTIPLE -> DECLARATION_MULTIPLE COMMA . IDF
+
+    IDF             shift and go to state 81
+
+
+state 49
+
+    (19) AFFECT -> IDF EQUAL . EXPR
+    (20) AFFECT -> IDF EQUAL . character_value
+    (61) AFF_COND_DEB -> IDF EQUAL . LPAREN EXPR COMMA
+    (31) EXPR -> . ARITHMETICAL_EXPRESSION
+    (32) EXPR -> . COMPARE_EXPRESSION
+    (33) EXPR -> . LOGICAL_EXPRESSION
+    (34) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION
+    (35) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION
+    (36) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION
+    (37) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION
+    (38) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION
+    (39) ARITHMETICAL_EXPRESSION -> . VALUE
+    (40) ARITHMETICAL_EXPRESSION -> . IDF
+    (41) ARITHMETICAL_EXPRESSION -> . IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET
+    (42) ARITHMETICAL_EXPRESSION -> . LPAREN ARITHMETICAL_EXPRESSION RPAREN
+    (43) COMPARE_EXPRESSION -> . ARITHMETICAL_EXPRESSION COMPARISON_OPERATOR ARITHMETICAL_EXPRESSION
+    (44) COMPARE_EXPRESSION -> . LPAREN COMPARE_EXPRESSION RPAREN
+    (45) LOGICAL_EXPRESSION -> . EXPR AND EXPR
+    (46) LOGICAL_EXPRESSION -> . EXPR OR EXPR
+    (47) LOGICAL_EXPRESSION -> . LOGICAL_VALUE
+    (48) LOGICAL_EXPRESSION -> . LPAREN LOGICAL_EXPRESSION RPAREN
+    (57) VALUE -> . integer_value
+    (58) VALUE -> . numeric_value
+    (55) LOGICAL_VALUE -> . TRUE
+    (56) LOGICAL_VALUE -> . FALSE
+
+    character_value shift and go to state 83
+    LPAREN          shift and go to state 84
+    IDF             shift and go to state 57
+    integer_value   shift and go to state 60
+    numeric_value   shift and go to state 61
+    TRUE            shift and go to state 62
+    FALSE           shift and go to state 63
+
+    EXPR                           shift and go to state 82
+    ARITHMETICAL_EXPRESSION        shift and go to state 53
+    COMPARE_EXPRESSION             shift and go to state 54
+    LOGICAL_EXPRESSION             shift and go to state 55
+    VALUE                          shift and go to state 56
+    LOGICAL_VALUE                  shift and go to state 59
+
+state 50
+
+    (17) INCR -> IDF INC . integer_value
+
+    integer_value   shift and go to state 85
+
+
+state 51
+
+    (18) DECR -> IDF DEC . integer_value
+
+    integer_value   shift and go to state 86
+
+
+state 52
+
+    (59) AFFECT_COND -> AFF_COND_EXP EXPR . RPAREN
+    (45) LOGICAL_EXPRESSION -> EXPR . AND EXPR
+    (46) LOGICAL_EXPRESSION -> EXPR . OR EXPR
+
+    RPAREN          shift and go to state 87
+    AND             shift and go to state 88
+    OR              shift and go to state 89
+
+
+state 53
+
+    (31) EXPR -> ARITHMETICAL_EXPRESSION .
+    (34) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . ADD ARITHMETICAL_EXPRESSION
+    (35) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . SUB ARITHMETICAL_EXPRESSION
+    (36) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . MUL ARITHMETICAL_EXPRESSION
+    (37) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . DIV ARITHMETICAL_EXPRESSION
+    (38) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . MOD ARITHMETICAL_EXPRESSION
+    (43) COMPARE_EXPRESSION -> ARITHMETICAL_EXPRESSION . COMPARISON_OPERATOR ARITHMETICAL_EXPRESSION
+    (49) COMPARISON_OPERATOR -> . SUP
+    (50) COMPARISON_OPERATOR -> . INF
+    (51) COMPARISON_OPERATOR -> . SUPEQUAL
+    (52) COMPARISON_OPERATOR -> . INFEQUAL
+    (53) COMPARISON_OPERATOR -> . EEQUAL
+    (54) COMPARISON_OPERATOR -> . NOTEQUAL
+
+    RPAREN          reduce using rule 31 (EXPR -> ARITHMETICAL_EXPRESSION .)
+    AND             reduce using rule 31 (EXPR -> ARITHMETICAL_EXPRESSION .)
+    OR              reduce using rule 31 (EXPR -> ARITHMETICAL_EXPRESSION .)
+    COMMA           reduce using rule 31 (EXPR -> ARITHMETICAL_EXPRESSION .)
+    NEWLINE         reduce using rule 31 (EXPR -> ARITHMETICAL_EXPRESSION .)
+    ADD             shift and go to state 90
+    SUB             shift and go to state 91
+    MUL             shift and go to state 92
+    DIV             shift and go to state 93
+    MOD             shift and go to state 94
+    SUP             shift and go to state 96
+    INF             shift and go to state 97
+    SUPEQUAL        shift and go to state 98
+    INFEQUAL        shift and go to state 99
+    EEQUAL          shift and go to state 100
+    NOTEQUAL        shift and go to state 101
+
+    COMPARISON_OPERATOR            shift and go to state 95
+
+state 54
+
+    (32) EXPR -> COMPARE_EXPRESSION .
+
+    RPAREN          reduce using rule 32 (EXPR -> COMPARE_EXPRESSION .)
+    AND             reduce using rule 32 (EXPR -> COMPARE_EXPRESSION .)
+    OR              reduce using rule 32 (EXPR -> COMPARE_EXPRESSION .)
+    COMMA           reduce using rule 32 (EXPR -> COMPARE_EXPRESSION .)
+    NEWLINE         reduce using rule 32 (EXPR -> COMPARE_EXPRESSION .)
+
+
+state 55
+
+    (33) EXPR -> LOGICAL_EXPRESSION .
+
+    RPAREN          reduce using rule 33 (EXPR -> LOGICAL_EXPRESSION .)
+    AND             reduce using rule 33 (EXPR -> LOGICAL_EXPRESSION .)
+    OR              reduce using rule 33 (EXPR -> LOGICAL_EXPRESSION .)
+    COMMA           reduce using rule 33 (EXPR -> LOGICAL_EXPRESSION .)
+    NEWLINE         reduce using rule 33 (EXPR -> LOGICAL_EXPRESSION .)
+
+
+state 56
+
+    (39) ARITHMETICAL_EXPRESSION -> VALUE .
+
+    ADD             reduce using rule 39 (ARITHMETICAL_EXPRESSION -> VALUE .)
+    SUB             reduce using rule 39 (ARITHMETICAL_EXPRESSION -> VALUE .)
+    MUL             reduce using rule 39 (ARITHMETICAL_EXPRESSION -> VALUE .)
+    DIV             reduce using rule 39 (ARITHMETICAL_EXPRESSION -> VALUE .)
+    MOD             reduce using rule 39 (ARITHMETICAL_EXPRESSION -> VALUE .)
+    SUP             reduce using rule 39 (ARITHMETICAL_EXPRESSION -> VALUE .)
+    INF             reduce using rule 39 (ARITHMETICAL_EXPRESSION -> VALUE .)
+    SUPEQUAL        reduce using rule 39 (ARITHMETICAL_EXPRESSION -> VALUE .)
+    INFEQUAL        reduce using rule 39 (ARITHMETICAL_EXPRESSION -> VALUE .)
+    EEQUAL          reduce using rule 39 (ARITHMETICAL_EXPRESSION -> VALUE .)
+    NOTEQUAL        reduce using rule 39 (ARITHMETICAL_EXPRESSION -> VALUE .)
+    RPAREN          reduce using rule 39 (ARITHMETICAL_EXPRESSION -> VALUE .)
+    AND             reduce using rule 39 (ARITHMETICAL_EXPRESSION -> VALUE .)
+    OR              reduce using rule 39 (ARITHMETICAL_EXPRESSION -> VALUE .)
+    COMMA           reduce using rule 39 (ARITHMETICAL_EXPRESSION -> VALUE .)
+    NEWLINE         reduce using rule 39 (ARITHMETICAL_EXPRESSION -> VALUE .)
+    RBRACKET        reduce using rule 39 (ARITHMETICAL_EXPRESSION -> VALUE .)
+
+
+state 57
+
+    (40) ARITHMETICAL_EXPRESSION -> IDF .
+    (41) ARITHMETICAL_EXPRESSION -> IDF . LBRACKET ARITHMETICAL_EXPRESSION RBRACKET
+
+    ADD             reduce using rule 40 (ARITHMETICAL_EXPRESSION -> IDF .)
+    SUB             reduce using rule 40 (ARITHMETICAL_EXPRESSION -> IDF .)
+    MUL             reduce using rule 40 (ARITHMETICAL_EXPRESSION -> IDF .)
+    DIV             reduce using rule 40 (ARITHMETICAL_EXPRESSION -> IDF .)
+    MOD             reduce using rule 40 (ARITHMETICAL_EXPRESSION -> IDF .)
+    SUP             reduce using rule 40 (ARITHMETICAL_EXPRESSION -> IDF .)
+    INF             reduce using rule 40 (ARITHMETICAL_EXPRESSION -> IDF .)
+    SUPEQUAL        reduce using rule 40 (ARITHMETICAL_EXPRESSION -> IDF .)
+    INFEQUAL        reduce using rule 40 (ARITHMETICAL_EXPRESSION -> IDF .)
+    EEQUAL          reduce using rule 40 (ARITHMETICAL_EXPRESSION -> IDF .)
+    NOTEQUAL        reduce using rule 40 (ARITHMETICAL_EXPRESSION -> IDF .)
+    RPAREN          reduce using rule 40 (ARITHMETICAL_EXPRESSION -> IDF .)
+    AND             reduce using rule 40 (ARITHMETICAL_EXPRESSION -> IDF .)
+    OR              reduce using rule 40 (ARITHMETICAL_EXPRESSION -> IDF .)
+    COMMA           reduce using rule 40 (ARITHMETICAL_EXPRESSION -> IDF .)
+    NEWLINE         reduce using rule 40 (ARITHMETICAL_EXPRESSION -> IDF .)
+    RBRACKET        reduce using rule 40 (ARITHMETICAL_EXPRESSION -> IDF .)
+    LBRACKET        shift and go to state 102
+
+
+state 58
+
+    (42) ARITHMETICAL_EXPRESSION -> LPAREN . ARITHMETICAL_EXPRESSION RPAREN
+    (44) COMPARE_EXPRESSION -> LPAREN . COMPARE_EXPRESSION RPAREN
+    (48) LOGICAL_EXPRESSION -> LPAREN . LOGICAL_EXPRESSION RPAREN
+    (34) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION
+    (35) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION
+    (36) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION
+    (37) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION
+    (38) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION
+    (39) ARITHMETICAL_EXPRESSION -> . VALUE
+    (40) ARITHMETICAL_EXPRESSION -> . IDF
+    (41) ARITHMETICAL_EXPRESSION -> . IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET
+    (42) ARITHMETICAL_EXPRESSION -> . LPAREN ARITHMETICAL_EXPRESSION RPAREN
+    (43) COMPARE_EXPRESSION -> . ARITHMETICAL_EXPRESSION COMPARISON_OPERATOR ARITHMETICAL_EXPRESSION
+    (44) COMPARE_EXPRESSION -> . LPAREN COMPARE_EXPRESSION RPAREN
+    (45) LOGICAL_EXPRESSION -> . EXPR AND EXPR
+    (46) LOGICAL_EXPRESSION -> . EXPR OR EXPR
+    (47) LOGICAL_EXPRESSION -> . LOGICAL_VALUE
+    (48) LOGICAL_EXPRESSION -> . LPAREN LOGICAL_EXPRESSION RPAREN
+    (57) VALUE -> . integer_value
+    (58) VALUE -> . numeric_value
+    (31) EXPR -> . ARITHMETICAL_EXPRESSION
+    (32) EXPR -> . COMPARE_EXPRESSION
+    (33) EXPR -> . LOGICAL_EXPRESSION
+    (55) LOGICAL_VALUE -> . TRUE
+    (56) LOGICAL_VALUE -> . FALSE
+
+    IDF             shift and go to state 57
+    LPAREN          shift and go to state 58
+    integer_value   shift and go to state 60
+    numeric_value   shift and go to state 61
+    TRUE            shift and go to state 62
+    FALSE           shift and go to state 63
+
+    ARITHMETICAL_EXPRESSION        shift and go to state 103
+    COMPARE_EXPRESSION             shift and go to state 104
+    LOGICAL_EXPRESSION             shift and go to state 105
+    VALUE                          shift and go to state 56
+    EXPR                           shift and go to state 106
+    LOGICAL_VALUE                  shift and go to state 59
+
+state 59
+
+    (47) LOGICAL_EXPRESSION -> LOGICAL_VALUE .
+
+    RPAREN          reduce using rule 47 (LOGICAL_EXPRESSION -> LOGICAL_VALUE .)
+    AND             reduce using rule 47 (LOGICAL_EXPRESSION -> LOGICAL_VALUE .)
+    OR              reduce using rule 47 (LOGICAL_EXPRESSION -> LOGICAL_VALUE .)
+    COMMA           reduce using rule 47 (LOGICAL_EXPRESSION -> LOGICAL_VALUE .)
+    NEWLINE         reduce using rule 47 (LOGICAL_EXPRESSION -> LOGICAL_VALUE .)
+
+
+state 60
+
+    (57) VALUE -> integer_value .
+
+    ADD             reduce using rule 57 (VALUE -> integer_value .)
+    SUB             reduce using rule 57 (VALUE -> integer_value .)
+    MUL             reduce using rule 57 (VALUE -> integer_value .)
+    DIV             reduce using rule 57 (VALUE -> integer_value .)
+    MOD             reduce using rule 57 (VALUE -> integer_value .)
+    SUP             reduce using rule 57 (VALUE -> integer_value .)
+    INF             reduce using rule 57 (VALUE -> integer_value .)
+    SUPEQUAL        reduce using rule 57 (VALUE -> integer_value .)
+    INFEQUAL        reduce using rule 57 (VALUE -> integer_value .)
+    EEQUAL          reduce using rule 57 (VALUE -> integer_value .)
+    NOTEQUAL        reduce using rule 57 (VALUE -> integer_value .)
+    RPAREN          reduce using rule 57 (VALUE -> integer_value .)
+    AND             reduce using rule 57 (VALUE -> integer_value .)
+    OR              reduce using rule 57 (VALUE -> integer_value .)
+    COMMA           reduce using rule 57 (VALUE -> integer_value .)
+    NEWLINE         reduce using rule 57 (VALUE -> integer_value .)
+    RBRACKET        reduce using rule 57 (VALUE -> integer_value .)
+
+
+state 61
+
+    (58) VALUE -> numeric_value .
+
+    ADD             reduce using rule 58 (VALUE -> numeric_value .)
+    SUB             reduce using rule 58 (VALUE -> numeric_value .)
+    MUL             reduce using rule 58 (VALUE -> numeric_value .)
+    DIV             reduce using rule 58 (VALUE -> numeric_value .)
+    MOD             reduce using rule 58 (VALUE -> numeric_value .)
+    SUP             reduce using rule 58 (VALUE -> numeric_value .)
+    INF             reduce using rule 58 (VALUE -> numeric_value .)
+    SUPEQUAL        reduce using rule 58 (VALUE -> numeric_value .)
+    INFEQUAL        reduce using rule 58 (VALUE -> numeric_value .)
+    EEQUAL          reduce using rule 58 (VALUE -> numeric_value .)
+    NOTEQUAL        reduce using rule 58 (VALUE -> numeric_value .)
+    RPAREN          reduce using rule 58 (VALUE -> numeric_value .)
+    AND             reduce using rule 58 (VALUE -> numeric_value .)
+    OR              reduce using rule 58 (VALUE -> numeric_value .)
+    COMMA           reduce using rule 58 (VALUE -> numeric_value .)
+    NEWLINE         reduce using rule 58 (VALUE -> numeric_value .)
+    RBRACKET        reduce using rule 58 (VALUE -> numeric_value .)
+
+
+state 62
+
+    (55) LOGICAL_VALUE -> TRUE .
+
+    RPAREN          reduce using rule 55 (LOGICAL_VALUE -> TRUE .)
+    AND             reduce using rule 55 (LOGICAL_VALUE -> TRUE .)
+    OR              reduce using rule 55 (LOGICAL_VALUE -> TRUE .)
+    COMMA           reduce using rule 55 (LOGICAL_VALUE -> TRUE .)
+    NEWLINE         reduce using rule 55 (LOGICAL_VALUE -> TRUE .)
+
+
+state 63
+
+    (56) LOGICAL_VALUE -> FALSE .
+
+    RPAREN          reduce using rule 56 (LOGICAL_VALUE -> FALSE .)
+    AND             reduce using rule 56 (LOGICAL_VALUE -> FALSE .)
+    OR              reduce using rule 56 (LOGICAL_VALUE -> FALSE .)
+    COMMA           reduce using rule 56 (LOGICAL_VALUE -> FALSE .)
+    NEWLINE         reduce using rule 56 (LOGICAL_VALUE -> FALSE .)
+
+
+state 64
+
+    (64) IF_INSTRUCTION -> IF_CONDITION NEWLINE . LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+
+    LACCO           shift and go to state 107
+
+
+state 65
+
+    (65) IF_INSTRUCTION -> ELSE_IF_CONDITION LACCO . NEWLINE INSTRUCTION_BLOCK RACCO
+
+    NEWLINE         shift and go to state 108
+
+
+state 66
+
+    (71) WHILE_COND -> WHILE_START LPAREN . EXPR RPAREN NEWLINE
+    (31) EXPR -> . ARITHMETICAL_EXPRESSION
+    (32) EXPR -> . COMPARE_EXPRESSION
+    (33) EXPR -> . LOGICAL_EXPRESSION
+    (34) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION
+    (35) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION
+    (36) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION
+    (37) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION
+    (38) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION
+    (39) ARITHMETICAL_EXPRESSION -> . VALUE
+    (40) ARITHMETICAL_EXPRESSION -> . IDF
+    (41) ARITHMETICAL_EXPRESSION -> . IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET
+    (42) ARITHMETICAL_EXPRESSION -> . LPAREN ARITHMETICAL_EXPRESSION RPAREN
+    (43) COMPARE_EXPRESSION -> . ARITHMETICAL_EXPRESSION COMPARISON_OPERATOR ARITHMETICAL_EXPRESSION
+    (44) COMPARE_EXPRESSION -> . LPAREN COMPARE_EXPRESSION RPAREN
+    (45) LOGICAL_EXPRESSION -> . EXPR AND EXPR
+    (46) LOGICAL_EXPRESSION -> . EXPR OR EXPR
+    (47) LOGICAL_EXPRESSION -> . LOGICAL_VALUE
+    (48) LOGICAL_EXPRESSION -> . LPAREN LOGICAL_EXPRESSION RPAREN
+    (57) VALUE -> . integer_value
+    (58) VALUE -> . numeric_value
+    (55) LOGICAL_VALUE -> . TRUE
+    (56) LOGICAL_VALUE -> . FALSE
+
+    IDF             shift and go to state 57
+    LPAREN          shift and go to state 58
+    integer_value   shift and go to state 60
+    numeric_value   shift and go to state 61
+    TRUE            shift and go to state 62
+    FALSE           shift and go to state 63
+
+    EXPR                           shift and go to state 109
+    ARITHMETICAL_EXPRESSION        shift and go to state 53
+    COMPARE_EXPRESSION             shift and go to state 54
+    LOGICAL_EXPRESSION             shift and go to state 55
+    VALUE                          shift and go to state 56
+    LOGICAL_VALUE                  shift and go to state 59
+
+state 67
+
+    (74) FOR_CONDITION -> FOR_START for_int . RPAREN NEWLINE
+
+    RPAREN          shift and go to state 110
+
+
+state 68
+
+    (76) for_int -> IDF .
+
+    RPAREN          reduce using rule 76 (for_int -> IDF .)
+    COLON           reduce using rule 76 (for_int -> IDF .)
+
+
+state 69
+
+    (77) for_int -> integer_value .
+
+    RPAREN          reduce using rule 77 (for_int -> integer_value .)
+    COLON           reduce using rule 77 (for_int -> integer_value .)
+
+
+state 70
+
+    (60) AFF_COND_EXP -> AFF_COND_DEB EXPR . COMMA
+    (45) LOGICAL_EXPRESSION -> EXPR . AND EXPR
+    (46) LOGICAL_EXPRESSION -> EXPR . OR EXPR
+
+    COMMA           shift and go to state 111
+    AND             shift and go to state 88
+    OR              shift and go to state 89
+
+
+state 71
+
+    (66) IF_CONDITION -> IF LPAREN . EXPR RPAREN
+    (31) EXPR -> . ARITHMETICAL_EXPRESSION
+    (32) EXPR -> . COMPARE_EXPRESSION
+    (33) EXPR -> . LOGICAL_EXPRESSION
+    (34) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION
+    (35) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION
+    (36) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION
+    (37) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION
+    (38) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION
+    (39) ARITHMETICAL_EXPRESSION -> . VALUE
+    (40) ARITHMETICAL_EXPRESSION -> . IDF
+    (41) ARITHMETICAL_EXPRESSION -> . IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET
+    (42) ARITHMETICAL_EXPRESSION -> . LPAREN ARITHMETICAL_EXPRESSION RPAREN
+    (43) COMPARE_EXPRESSION -> . ARITHMETICAL_EXPRESSION COMPARISON_OPERATOR ARITHMETICAL_EXPRESSION
+    (44) COMPARE_EXPRESSION -> . LPAREN COMPARE_EXPRESSION RPAREN
+    (45) LOGICAL_EXPRESSION -> . EXPR AND EXPR
+    (46) LOGICAL_EXPRESSION -> . EXPR OR EXPR
+    (47) LOGICAL_EXPRESSION -> . LOGICAL_VALUE
+    (48) LOGICAL_EXPRESSION -> . LPAREN LOGICAL_EXPRESSION RPAREN
+    (57) VALUE -> . integer_value
+    (58) VALUE -> . numeric_value
+    (55) LOGICAL_VALUE -> . TRUE
+    (56) LOGICAL_VALUE -> . FALSE
+
+    IDF             shift and go to state 57
+    LPAREN          shift and go to state 58
+    integer_value   shift and go to state 60
+    numeric_value   shift and go to state 61
+    TRUE            shift and go to state 62
+    FALSE           shift and go to state 63
+
+    EXPR                           shift and go to state 112
+    ARITHMETICAL_EXPRESSION        shift and go to state 53
+    COMPARE_EXPRESSION             shift and go to state 54
+    LOGICAL_EXPRESSION             shift and go to state 55
+    VALUE                          shift and go to state 56
+    LOGICAL_VALUE                  shift and go to state 59
+
+state 72
+
+    (69) ELSE_IF_CONDITION -> ELSE_IF LPAREN . EXPR RPAREN NEWLINE
+    (31) EXPR -> . ARITHMETICAL_EXPRESSION
+    (32) EXPR -> . COMPARE_EXPRESSION
+    (33) EXPR -> . LOGICAL_EXPRESSION
+    (34) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION
+    (35) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION
+    (36) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION
+    (37) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION
+    (38) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION
+    (39) ARITHMETICAL_EXPRESSION -> . VALUE
+    (40) ARITHMETICAL_EXPRESSION -> . IDF
+    (41) ARITHMETICAL_EXPRESSION -> . IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET
+    (42) ARITHMETICAL_EXPRESSION -> . LPAREN ARITHMETICAL_EXPRESSION RPAREN
+    (43) COMPARE_EXPRESSION -> . ARITHMETICAL_EXPRESSION COMPARISON_OPERATOR ARITHMETICAL_EXPRESSION
+    (44) COMPARE_EXPRESSION -> . LPAREN COMPARE_EXPRESSION RPAREN
+    (45) LOGICAL_EXPRESSION -> . EXPR AND EXPR
+    (46) LOGICAL_EXPRESSION -> . EXPR OR EXPR
+    (47) LOGICAL_EXPRESSION -> . LOGICAL_VALUE
+    (48) LOGICAL_EXPRESSION -> . LPAREN LOGICAL_EXPRESSION RPAREN
+    (57) VALUE -> . integer_value
+    (58) VALUE -> . numeric_value
+    (55) LOGICAL_VALUE -> . TRUE
+    (56) LOGICAL_VALUE -> . FALSE
+
+    IDF             shift and go to state 57
+    LPAREN          shift and go to state 58
+    integer_value   shift and go to state 60
+    numeric_value   shift and go to state 61
+    TRUE            shift and go to state 62
+    FALSE           shift and go to state 63
+
+    EXPR                           shift and go to state 113
+    ARITHMETICAL_EXPRESSION        shift and go to state 53
+    COMPARE_EXPRESSION             shift and go to state 54
+    LOGICAL_EXPRESSION             shift and go to state 55
+    VALUE                          shift and go to state 56
+    LOGICAL_VALUE                  shift and go to state 59
+
+state 73
+
+    (75) FOR_START -> FOR LPAREN . IDF IN for_int COLON
+
+    IDF             shift and go to state 114
+
+
+state 74
+
+    (3) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK INST NEWLINE .
+
+    COMMENT         reduce using rule 3 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK INST NEWLINE .)
+    IDF             reduce using rule 3 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK INST NEWLINE .)
+    INTEGER         reduce using rule 3 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK INST NEWLINE .)
+    NUMERIC         reduce using rule 3 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK INST NEWLINE .)
+    CHARACTER       reduce using rule 3 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK INST NEWLINE .)
+    LOGICAL         reduce using rule 3 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK INST NEWLINE .)
+    IF              reduce using rule 3 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK INST NEWLINE .)
+    WHILE           reduce using rule 3 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK INST NEWLINE .)
+    FOR             reduce using rule 3 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK INST NEWLINE .)
+    $end            reduce using rule 3 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK INST NEWLINE .)
+    RACCO           reduce using rule 3 (INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK INST NEWLINE .)
+
+
+state 75
+
+    (67) IF_ELSE_BLOC -> IF_INSTRUCTION NEWLINE ELSE . NEWLINE LACCO NEWLINE
+    (68) ELSE_IF -> IF_INSTRUCTION NEWLINE ELSE . IF
+
+    NEWLINE         shift and go to state 115
+    IF              shift and go to state 116
+
+
+state 76
+
+    (63) IF_CLAUSE -> IF_ELSE_BLOC INSTRUCTION_BLOCK RACCO . NEWLINE
+
+    NEWLINE         shift and go to state 117
+
+
+state 77
+
+    (70) WHILE_INSTRUCTION -> WHILE_COND LACCO NEWLINE . INSTRUCTION_BLOCK RACCO NEWLINE
+    (3) INSTRUCTION_BLOCK -> . INSTRUCTION_BLOCK INST NEWLINE
+    (4) INSTRUCTION_BLOCK -> . INST NEWLINE
+    (5) INSTRUCTION_BLOCK -> . IF_CLAUSE
+    (6) INSTRUCTION_BLOCK -> . WHILE_INSTRUCTION
+    (7) INSTRUCTION_BLOCK -> . FOR_INSTRUCTION
+    (8) INSTRUCTION_BLOCK -> . INSTRUCTION_BLOCK IF_CLAUSE
+    (9) INSTRUCTION_BLOCK -> . INSTRUCTION_BLOCK WHILE_INSTRUCTION
+    (10) INSTRUCTION_BLOCK -> . INSTRUCTION_BLOCK FOR_INSTRUCTION
+    (11) INST -> . DECLARATION
+    (12) INST -> . AFFECT
+    (13) INST -> . AFFECT_COND
+    (14) INST -> . INCR
+    (15) INST -> . DECR
+    (16) INST -> . COMMENT
+    (62) IF_CLAUSE -> . IF_INSTRUCTION NEWLINE
+    (63) IF_CLAUSE -> . IF_ELSE_BLOC INSTRUCTION_BLOCK RACCO NEWLINE
+    (70) WHILE_INSTRUCTION -> . WHILE_COND LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+    (73) FOR_INSTRUCTION -> . FOR_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+    (21) DECLARATION -> . TYPE AFFECT
+    (22) DECLARATION -> . DECLARATION_MULTIPLE
+    (25) DECLARATION -> . ARRAY_DECLARATION
+    (19) AFFECT -> . IDF EQUAL EXPR
+    (20) AFFECT -> . IDF EQUAL character_value
+    (59) AFFECT_COND -> . AFF_COND_EXP EXPR RPAREN
+    (17) INCR -> . IDF INC integer_value
+    (18) DECR -> . IDF DEC integer_value
+    (64) IF_INSTRUCTION -> . IF_CONDITION NEWLINE LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+    (65) IF_INSTRUCTION -> . ELSE_IF_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+    (67) IF_ELSE_BLOC -> . IF_INSTRUCTION NEWLINE ELSE NEWLINE LACCO NEWLINE
+    (71) WHILE_COND -> . WHILE_START LPAREN EXPR RPAREN NEWLINE
+    (74) FOR_CONDITION -> . FOR_START for_int RPAREN NEWLINE
+    (27) TYPE -> . INTEGER
+    (28) TYPE -> . NUMERIC
+    (29) TYPE -> . CHARACTER
+    (30) TYPE -> . LOGICAL
+    (23) DECLARATION_MULTIPLE -> . TYPE IDF
+    (24) DECLARATION_MULTIPLE -> . DECLARATION_MULTIPLE COMMA IDF
+    (26) ARRAY_DECLARATION -> . TYPE IDF LBRACKET integer_value RBRACKET
+    (60) AFF_COND_EXP -> . AFF_COND_DEB EXPR COMMA
+    (66) IF_CONDITION -> . IF LPAREN EXPR RPAREN
+    (69) ELSE_IF_CONDITION -> . ELSE_IF LPAREN EXPR RPAREN NEWLINE
+    (72) WHILE_START -> . WHILE
+    (75) FOR_START -> . FOR LPAREN IDF IN for_int COLON
+    (61) AFF_COND_DEB -> . IDF EQUAL LPAREN EXPR COMMA
+    (68) ELSE_IF -> . IF_INSTRUCTION NEWLINE ELSE IF
+
+    COMMENT         shift and go to state 13
+    IDF             shift and go to state 21
+    INTEGER         shift and go to state 27
+    NUMERIC         shift and go to state 28
+    CHARACTER       shift and go to state 29
+    LOGICAL         shift and go to state 30
+    IF              shift and go to state 32
+    WHILE           shift and go to state 34
+    FOR             shift and go to state 35
+
+    WHILE_COND                     shift and go to state 16
+    INSTRUCTION_BLOCK              shift and go to state 118
+    INST                           shift and go to state 4
+    IF_CLAUSE                      shift and go to state 5
+    WHILE_INSTRUCTION              shift and go to state 6
+    FOR_INSTRUCTION                shift and go to state 7
+    DECLARATION                    shift and go to state 8
+    AFFECT                         shift and go to state 9
+    AFFECT_COND                    shift and go to state 10
+    INCR                           shift and go to state 11
+    DECR                           shift and go to state 12
+    IF_INSTRUCTION                 shift and go to state 14
+    IF_ELSE_BLOC                   shift and go to state 15
+    FOR_CONDITION                  shift and go to state 17
+    TYPE                           shift and go to state 18
+    DECLARATION_MULTIPLE           shift and go to state 19
+    ARRAY_DECLARATION              shift and go to state 20
+    AFF_COND_EXP                   shift and go to state 22
+    IF_CONDITION                   shift and go to state 23
+    ELSE_IF_CONDITION              shift and go to state 24
+    WHILE_START                    shift and go to state 25
+    FOR_START                      shift and go to state 26
+    AFF_COND_DEB                   shift and go to state 31
+    ELSE_IF                        shift and go to state 33
+
+state 78
+
+    (73) FOR_INSTRUCTION -> FOR_CONDITION LACCO NEWLINE . INSTRUCTION_BLOCK RACCO NEWLINE
+    (3) INSTRUCTION_BLOCK -> . INSTRUCTION_BLOCK INST NEWLINE
+    (4) INSTRUCTION_BLOCK -> . INST NEWLINE
+    (5) INSTRUCTION_BLOCK -> . IF_CLAUSE
+    (6) INSTRUCTION_BLOCK -> . WHILE_INSTRUCTION
+    (7) INSTRUCTION_BLOCK -> . FOR_INSTRUCTION
+    (8) INSTRUCTION_BLOCK -> . INSTRUCTION_BLOCK IF_CLAUSE
+    (9) INSTRUCTION_BLOCK -> . INSTRUCTION_BLOCK WHILE_INSTRUCTION
+    (10) INSTRUCTION_BLOCK -> . INSTRUCTION_BLOCK FOR_INSTRUCTION
+    (11) INST -> . DECLARATION
+    (12) INST -> . AFFECT
+    (13) INST -> . AFFECT_COND
+    (14) INST -> . INCR
+    (15) INST -> . DECR
+    (16) INST -> . COMMENT
+    (62) IF_CLAUSE -> . IF_INSTRUCTION NEWLINE
+    (63) IF_CLAUSE -> . IF_ELSE_BLOC INSTRUCTION_BLOCK RACCO NEWLINE
+    (70) WHILE_INSTRUCTION -> . WHILE_COND LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+    (73) FOR_INSTRUCTION -> . FOR_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+    (21) DECLARATION -> . TYPE AFFECT
+    (22) DECLARATION -> . DECLARATION_MULTIPLE
+    (25) DECLARATION -> . ARRAY_DECLARATION
+    (19) AFFECT -> . IDF EQUAL EXPR
+    (20) AFFECT -> . IDF EQUAL character_value
+    (59) AFFECT_COND -> . AFF_COND_EXP EXPR RPAREN
+    (17) INCR -> . IDF INC integer_value
+    (18) DECR -> . IDF DEC integer_value
+    (64) IF_INSTRUCTION -> . IF_CONDITION NEWLINE LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+    (65) IF_INSTRUCTION -> . ELSE_IF_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+    (67) IF_ELSE_BLOC -> . IF_INSTRUCTION NEWLINE ELSE NEWLINE LACCO NEWLINE
+    (71) WHILE_COND -> . WHILE_START LPAREN EXPR RPAREN NEWLINE
+    (74) FOR_CONDITION -> . FOR_START for_int RPAREN NEWLINE
+    (27) TYPE -> . INTEGER
+    (28) TYPE -> . NUMERIC
+    (29) TYPE -> . CHARACTER
+    (30) TYPE -> . LOGICAL
+    (23) DECLARATION_MULTIPLE -> . TYPE IDF
+    (24) DECLARATION_MULTIPLE -> . DECLARATION_MULTIPLE COMMA IDF
+    (26) ARRAY_DECLARATION -> . TYPE IDF LBRACKET integer_value RBRACKET
+    (60) AFF_COND_EXP -> . AFF_COND_DEB EXPR COMMA
+    (66) IF_CONDITION -> . IF LPAREN EXPR RPAREN
+    (69) ELSE_IF_CONDITION -> . ELSE_IF LPAREN EXPR RPAREN NEWLINE
+    (72) WHILE_START -> . WHILE
+    (75) FOR_START -> . FOR LPAREN IDF IN for_int COLON
+    (61) AFF_COND_DEB -> . IDF EQUAL LPAREN EXPR COMMA
+    (68) ELSE_IF -> . IF_INSTRUCTION NEWLINE ELSE IF
+
+    COMMENT         shift and go to state 13
+    IDF             shift and go to state 21
+    INTEGER         shift and go to state 27
+    NUMERIC         shift and go to state 28
+    CHARACTER       shift and go to state 29
+    LOGICAL         shift and go to state 30
+    IF              shift and go to state 32
+    WHILE           shift and go to state 34
+    FOR             shift and go to state 35
+
+    FOR_CONDITION                  shift and go to state 17
+    INSTRUCTION_BLOCK              shift and go to state 119
+    INST                           shift and go to state 4
+    IF_CLAUSE                      shift and go to state 5
+    WHILE_INSTRUCTION              shift and go to state 6
+    FOR_INSTRUCTION                shift and go to state 7
+    DECLARATION                    shift and go to state 8
+    AFFECT                         shift and go to state 9
+    AFFECT_COND                    shift and go to state 10
+    INCR                           shift and go to state 11
+    DECR                           shift and go to state 12
+    IF_INSTRUCTION                 shift and go to state 14
+    IF_ELSE_BLOC                   shift and go to state 15
+    WHILE_COND                     shift and go to state 16
+    TYPE                           shift and go to state 18
+    DECLARATION_MULTIPLE           shift and go to state 19
+    ARRAY_DECLARATION              shift and go to state 20
+    AFF_COND_EXP                   shift and go to state 22
+    IF_CONDITION                   shift and go to state 23
+    ELSE_IF_CONDITION              shift and go to state 24
+    WHILE_START                    shift and go to state 25
+    FOR_START                      shift and go to state 26
+    AFF_COND_DEB                   shift and go to state 31
+    ELSE_IF                        shift and go to state 33
+
+state 79
+
+    (26) ARRAY_DECLARATION -> TYPE IDF LBRACKET . integer_value RBRACKET
+
+    integer_value   shift and go to state 120
+
+
+state 80
+
+    (19) AFFECT -> IDF EQUAL . EXPR
+    (20) AFFECT -> IDF EQUAL . character_value
+    (31) EXPR -> . ARITHMETICAL_EXPRESSION
+    (32) EXPR -> . COMPARE_EXPRESSION
+    (33) EXPR -> . LOGICAL_EXPRESSION
+    (34) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION
+    (35) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION
+    (36) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION
+    (37) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION
+    (38) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION
+    (39) ARITHMETICAL_EXPRESSION -> . VALUE
+    (40) ARITHMETICAL_EXPRESSION -> . IDF
+    (41) ARITHMETICAL_EXPRESSION -> . IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET
+    (42) ARITHMETICAL_EXPRESSION -> . LPAREN ARITHMETICAL_EXPRESSION RPAREN
+    (43) COMPARE_EXPRESSION -> . ARITHMETICAL_EXPRESSION COMPARISON_OPERATOR ARITHMETICAL_EXPRESSION
+    (44) COMPARE_EXPRESSION -> . LPAREN COMPARE_EXPRESSION RPAREN
+    (45) LOGICAL_EXPRESSION -> . EXPR AND EXPR
+    (46) LOGICAL_EXPRESSION -> . EXPR OR EXPR
+    (47) LOGICAL_EXPRESSION -> . LOGICAL_VALUE
+    (48) LOGICAL_EXPRESSION -> . LPAREN LOGICAL_EXPRESSION RPAREN
+    (57) VALUE -> . integer_value
+    (58) VALUE -> . numeric_value
+    (55) LOGICAL_VALUE -> . TRUE
+    (56) LOGICAL_VALUE -> . FALSE
+
+    character_value shift and go to state 83
+    IDF             shift and go to state 57
+    LPAREN          shift and go to state 58
+    integer_value   shift and go to state 60
+    numeric_value   shift and go to state 61
+    TRUE            shift and go to state 62
+    FALSE           shift and go to state 63
+
+    EXPR                           shift and go to state 82
+    ARITHMETICAL_EXPRESSION        shift and go to state 53
+    COMPARE_EXPRESSION             shift and go to state 54
+    LOGICAL_EXPRESSION             shift and go to state 55
+    VALUE                          shift and go to state 56
+    LOGICAL_VALUE                  shift and go to state 59
+
+state 81
+
+    (24) DECLARATION_MULTIPLE -> DECLARATION_MULTIPLE COMMA IDF .
+
+    COMMA           reduce using rule 24 (DECLARATION_MULTIPLE -> DECLARATION_MULTIPLE COMMA IDF .)
+    NEWLINE         reduce using rule 24 (DECLARATION_MULTIPLE -> DECLARATION_MULTIPLE COMMA IDF .)
+
+
+state 82
+
+    (19) AFFECT -> IDF EQUAL EXPR .
+    (45) LOGICAL_EXPRESSION -> EXPR . AND EXPR
+    (46) LOGICAL_EXPRESSION -> EXPR . OR EXPR
+
+    NEWLINE         reduce using rule 19 (AFFECT -> IDF EQUAL EXPR .)
+    AND             shift and go to state 88
+    OR              shift and go to state 89
+
+
+state 83
+
+    (20) AFFECT -> IDF EQUAL character_value .
+
+    NEWLINE         reduce using rule 20 (AFFECT -> IDF EQUAL character_value .)
+
+
+state 84
+
+    (61) AFF_COND_DEB -> IDF EQUAL LPAREN . EXPR COMMA
+    (42) ARITHMETICAL_EXPRESSION -> LPAREN . ARITHMETICAL_EXPRESSION RPAREN
+    (44) COMPARE_EXPRESSION -> LPAREN . COMPARE_EXPRESSION RPAREN
+    (48) LOGICAL_EXPRESSION -> LPAREN . LOGICAL_EXPRESSION RPAREN
+    (31) EXPR -> . ARITHMETICAL_EXPRESSION
+    (32) EXPR -> . COMPARE_EXPRESSION
+    (33) EXPR -> . LOGICAL_EXPRESSION
+    (34) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION
+    (35) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION
+    (36) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION
+    (37) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION
+    (38) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION
+    (39) ARITHMETICAL_EXPRESSION -> . VALUE
+    (40) ARITHMETICAL_EXPRESSION -> . IDF
+    (41) ARITHMETICAL_EXPRESSION -> . IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET
+    (42) ARITHMETICAL_EXPRESSION -> . LPAREN ARITHMETICAL_EXPRESSION RPAREN
+    (43) COMPARE_EXPRESSION -> . ARITHMETICAL_EXPRESSION COMPARISON_OPERATOR ARITHMETICAL_EXPRESSION
+    (44) COMPARE_EXPRESSION -> . LPAREN COMPARE_EXPRESSION RPAREN
+    (45) LOGICAL_EXPRESSION -> . EXPR AND EXPR
+    (46) LOGICAL_EXPRESSION -> . EXPR OR EXPR
+    (47) LOGICAL_EXPRESSION -> . LOGICAL_VALUE
+    (48) LOGICAL_EXPRESSION -> . LPAREN LOGICAL_EXPRESSION RPAREN
+    (57) VALUE -> . integer_value
+    (58) VALUE -> . numeric_value
+    (55) LOGICAL_VALUE -> . TRUE
+    (56) LOGICAL_VALUE -> . FALSE
+
+    IDF             shift and go to state 57
+    LPAREN          shift and go to state 58
+    integer_value   shift and go to state 60
+    numeric_value   shift and go to state 61
+    TRUE            shift and go to state 62
+    FALSE           shift and go to state 63
+
+    EXPR                           shift and go to state 121
+    ARITHMETICAL_EXPRESSION        shift and go to state 122
+    COMPARE_EXPRESSION             shift and go to state 104
+    LOGICAL_EXPRESSION             shift and go to state 105
+    VALUE                          shift and go to state 56
+    LOGICAL_VALUE                  shift and go to state 59
+
+state 85
+
+    (17) INCR -> IDF INC integer_value .
+
+    NEWLINE         reduce using rule 17 (INCR -> IDF INC integer_value .)
+
+
+state 86
+
+    (18) DECR -> IDF DEC integer_value .
+
+    NEWLINE         reduce using rule 18 (DECR -> IDF DEC integer_value .)
+
+
+state 87
+
+    (59) AFFECT_COND -> AFF_COND_EXP EXPR RPAREN .
+
+    NEWLINE         reduce using rule 59 (AFFECT_COND -> AFF_COND_EXP EXPR RPAREN .)
+
+
+state 88
+
+    (45) LOGICAL_EXPRESSION -> EXPR AND . EXPR
+    (31) EXPR -> . ARITHMETICAL_EXPRESSION
+    (32) EXPR -> . COMPARE_EXPRESSION
+    (33) EXPR -> . LOGICAL_EXPRESSION
+    (34) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION
+    (35) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION
+    (36) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION
+    (37) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION
+    (38) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION
+    (39) ARITHMETICAL_EXPRESSION -> . VALUE
+    (40) ARITHMETICAL_EXPRESSION -> . IDF
+    (41) ARITHMETICAL_EXPRESSION -> . IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET
+    (42) ARITHMETICAL_EXPRESSION -> . LPAREN ARITHMETICAL_EXPRESSION RPAREN
+    (43) COMPARE_EXPRESSION -> . ARITHMETICAL_EXPRESSION COMPARISON_OPERATOR ARITHMETICAL_EXPRESSION
+    (44) COMPARE_EXPRESSION -> . LPAREN COMPARE_EXPRESSION RPAREN
+    (45) LOGICAL_EXPRESSION -> . EXPR AND EXPR
+    (46) LOGICAL_EXPRESSION -> . EXPR OR EXPR
+    (47) LOGICAL_EXPRESSION -> . LOGICAL_VALUE
+    (48) LOGICAL_EXPRESSION -> . LPAREN LOGICAL_EXPRESSION RPAREN
+    (57) VALUE -> . integer_value
+    (58) VALUE -> . numeric_value
+    (55) LOGICAL_VALUE -> . TRUE
+    (56) LOGICAL_VALUE -> . FALSE
+
+    IDF             shift and go to state 57
+    LPAREN          shift and go to state 58
+    integer_value   shift and go to state 60
+    numeric_value   shift and go to state 61
+    TRUE            shift and go to state 62
+    FALSE           shift and go to state 63
+
+    EXPR                           shift and go to state 123
+    ARITHMETICAL_EXPRESSION        shift and go to state 53
+    COMPARE_EXPRESSION             shift and go to state 54
+    LOGICAL_EXPRESSION             shift and go to state 55
+    VALUE                          shift and go to state 56
+    LOGICAL_VALUE                  shift and go to state 59
+
+state 89
+
+    (46) LOGICAL_EXPRESSION -> EXPR OR . EXPR
+    (31) EXPR -> . ARITHMETICAL_EXPRESSION
+    (32) EXPR -> . COMPARE_EXPRESSION
+    (33) EXPR -> . LOGICAL_EXPRESSION
+    (34) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION
+    (35) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION
+    (36) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION
+    (37) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION
+    (38) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION
+    (39) ARITHMETICAL_EXPRESSION -> . VALUE
+    (40) ARITHMETICAL_EXPRESSION -> . IDF
+    (41) ARITHMETICAL_EXPRESSION -> . IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET
+    (42) ARITHMETICAL_EXPRESSION -> . LPAREN ARITHMETICAL_EXPRESSION RPAREN
+    (43) COMPARE_EXPRESSION -> . ARITHMETICAL_EXPRESSION COMPARISON_OPERATOR ARITHMETICAL_EXPRESSION
+    (44) COMPARE_EXPRESSION -> . LPAREN COMPARE_EXPRESSION RPAREN
+    (45) LOGICAL_EXPRESSION -> . EXPR AND EXPR
+    (46) LOGICAL_EXPRESSION -> . EXPR OR EXPR
+    (47) LOGICAL_EXPRESSION -> . LOGICAL_VALUE
+    (48) LOGICAL_EXPRESSION -> . LPAREN LOGICAL_EXPRESSION RPAREN
+    (57) VALUE -> . integer_value
+    (58) VALUE -> . numeric_value
+    (55) LOGICAL_VALUE -> . TRUE
+    (56) LOGICAL_VALUE -> . FALSE
+
+    IDF             shift and go to state 57
+    LPAREN          shift and go to state 58
+    integer_value   shift and go to state 60
+    numeric_value   shift and go to state 61
+    TRUE            shift and go to state 62
+    FALSE           shift and go to state 63
+
+    EXPR                           shift and go to state 124
+    ARITHMETICAL_EXPRESSION        shift and go to state 53
+    COMPARE_EXPRESSION             shift and go to state 54
+    LOGICAL_EXPRESSION             shift and go to state 55
+    VALUE                          shift and go to state 56
+    LOGICAL_VALUE                  shift and go to state 59
+
+state 90
+
+    (34) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION ADD . ARITHMETICAL_EXPRESSION
+    (34) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION
+    (35) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION
+    (36) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION
+    (37) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION
+    (38) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION
+    (39) ARITHMETICAL_EXPRESSION -> . VALUE
+    (40) ARITHMETICAL_EXPRESSION -> . IDF
+    (41) ARITHMETICAL_EXPRESSION -> . IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET
+    (42) ARITHMETICAL_EXPRESSION -> . LPAREN ARITHMETICAL_EXPRESSION RPAREN
+    (57) VALUE -> . integer_value
+    (58) VALUE -> . numeric_value
+
+    IDF             shift and go to state 57
+    LPAREN          shift and go to state 126
+    integer_value   shift and go to state 60
+    numeric_value   shift and go to state 61
+
+    ARITHMETICAL_EXPRESSION        shift and go to state 125
+    VALUE                          shift and go to state 56
+
+state 91
+
+    (35) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION SUB . ARITHMETICAL_EXPRESSION
+    (34) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION
+    (35) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION
+    (36) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION
+    (37) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION
+    (38) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION
+    (39) ARITHMETICAL_EXPRESSION -> . VALUE
+    (40) ARITHMETICAL_EXPRESSION -> . IDF
+    (41) ARITHMETICAL_EXPRESSION -> . IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET
+    (42) ARITHMETICAL_EXPRESSION -> . LPAREN ARITHMETICAL_EXPRESSION RPAREN
+    (57) VALUE -> . integer_value
+    (58) VALUE -> . numeric_value
+
+    IDF             shift and go to state 57
+    LPAREN          shift and go to state 126
+    integer_value   shift and go to state 60
+    numeric_value   shift and go to state 61
+
+    ARITHMETICAL_EXPRESSION        shift and go to state 127
+    VALUE                          shift and go to state 56
+
+state 92
+
+    (36) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MUL . ARITHMETICAL_EXPRESSION
+    (34) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION
+    (35) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION
+    (36) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION
+    (37) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION
+    (38) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION
+    (39) ARITHMETICAL_EXPRESSION -> . VALUE
+    (40) ARITHMETICAL_EXPRESSION -> . IDF
+    (41) ARITHMETICAL_EXPRESSION -> . IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET
+    (42) ARITHMETICAL_EXPRESSION -> . LPAREN ARITHMETICAL_EXPRESSION RPAREN
+    (57) VALUE -> . integer_value
+    (58) VALUE -> . numeric_value
+
+    IDF             shift and go to state 57
+    LPAREN          shift and go to state 126
+    integer_value   shift and go to state 60
+    numeric_value   shift and go to state 61
+
+    ARITHMETICAL_EXPRESSION        shift and go to state 128
+    VALUE                          shift and go to state 56
+
+state 93
+
+    (37) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION DIV . ARITHMETICAL_EXPRESSION
+    (34) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION
+    (35) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION
+    (36) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION
+    (37) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION
+    (38) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION
+    (39) ARITHMETICAL_EXPRESSION -> . VALUE
+    (40) ARITHMETICAL_EXPRESSION -> . IDF
+    (41) ARITHMETICAL_EXPRESSION -> . IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET
+    (42) ARITHMETICAL_EXPRESSION -> . LPAREN ARITHMETICAL_EXPRESSION RPAREN
+    (57) VALUE -> . integer_value
+    (58) VALUE -> . numeric_value
+
+    IDF             shift and go to state 57
+    LPAREN          shift and go to state 126
+    integer_value   shift and go to state 60
+    numeric_value   shift and go to state 61
+
+    ARITHMETICAL_EXPRESSION        shift and go to state 129
+    VALUE                          shift and go to state 56
+
+state 94
+
+    (38) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MOD . ARITHMETICAL_EXPRESSION
+    (34) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION
+    (35) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION
+    (36) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION
+    (37) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION
+    (38) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION
+    (39) ARITHMETICAL_EXPRESSION -> . VALUE
+    (40) ARITHMETICAL_EXPRESSION -> . IDF
+    (41) ARITHMETICAL_EXPRESSION -> . IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET
+    (42) ARITHMETICAL_EXPRESSION -> . LPAREN ARITHMETICAL_EXPRESSION RPAREN
+    (57) VALUE -> . integer_value
+    (58) VALUE -> . numeric_value
+
+    IDF             shift and go to state 57
+    LPAREN          shift and go to state 126
+    integer_value   shift and go to state 60
+    numeric_value   shift and go to state 61
+
+    ARITHMETICAL_EXPRESSION        shift and go to state 130
+    VALUE                          shift and go to state 56
+
+state 95
+
+    (43) COMPARE_EXPRESSION -> ARITHMETICAL_EXPRESSION COMPARISON_OPERATOR . ARITHMETICAL_EXPRESSION
+    (34) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION
+    (35) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION
+    (36) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION
+    (37) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION
+    (38) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION
+    (39) ARITHMETICAL_EXPRESSION -> . VALUE
+    (40) ARITHMETICAL_EXPRESSION -> . IDF
+    (41) ARITHMETICAL_EXPRESSION -> . IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET
+    (42) ARITHMETICAL_EXPRESSION -> . LPAREN ARITHMETICAL_EXPRESSION RPAREN
+    (57) VALUE -> . integer_value
+    (58) VALUE -> . numeric_value
+
+    IDF             shift and go to state 57
+    LPAREN          shift and go to state 126
+    integer_value   shift and go to state 60
+    numeric_value   shift and go to state 61
+
+    ARITHMETICAL_EXPRESSION        shift and go to state 131
+    VALUE                          shift and go to state 56
+
+state 96
+
+    (49) COMPARISON_OPERATOR -> SUP .
+
+    IDF             reduce using rule 49 (COMPARISON_OPERATOR -> SUP .)
+    LPAREN          reduce using rule 49 (COMPARISON_OPERATOR -> SUP .)
+    integer_value   reduce using rule 49 (COMPARISON_OPERATOR -> SUP .)
+    numeric_value   reduce using rule 49 (COMPARISON_OPERATOR -> SUP .)
+
+
+state 97
+
+    (50) COMPARISON_OPERATOR -> INF .
+
+    IDF             reduce using rule 50 (COMPARISON_OPERATOR -> INF .)
+    LPAREN          reduce using rule 50 (COMPARISON_OPERATOR -> INF .)
+    integer_value   reduce using rule 50 (COMPARISON_OPERATOR -> INF .)
+    numeric_value   reduce using rule 50 (COMPARISON_OPERATOR -> INF .)
+
+
+state 98
+
+    (51) COMPARISON_OPERATOR -> SUPEQUAL .
+
+    IDF             reduce using rule 51 (COMPARISON_OPERATOR -> SUPEQUAL .)
+    LPAREN          reduce using rule 51 (COMPARISON_OPERATOR -> SUPEQUAL .)
+    integer_value   reduce using rule 51 (COMPARISON_OPERATOR -> SUPEQUAL .)
+    numeric_value   reduce using rule 51 (COMPARISON_OPERATOR -> SUPEQUAL .)
+
+
+state 99
+
+    (52) COMPARISON_OPERATOR -> INFEQUAL .
+
+    IDF             reduce using rule 52 (COMPARISON_OPERATOR -> INFEQUAL .)
+    LPAREN          reduce using rule 52 (COMPARISON_OPERATOR -> INFEQUAL .)
+    integer_value   reduce using rule 52 (COMPARISON_OPERATOR -> INFEQUAL .)
+    numeric_value   reduce using rule 52 (COMPARISON_OPERATOR -> INFEQUAL .)
+
+
+state 100
+
+    (53) COMPARISON_OPERATOR -> EEQUAL .
+
+    IDF             reduce using rule 53 (COMPARISON_OPERATOR -> EEQUAL .)
+    LPAREN          reduce using rule 53 (COMPARISON_OPERATOR -> EEQUAL .)
+    integer_value   reduce using rule 53 (COMPARISON_OPERATOR -> EEQUAL .)
+    numeric_value   reduce using rule 53 (COMPARISON_OPERATOR -> EEQUAL .)
+
+
+state 101
+
+    (54) COMPARISON_OPERATOR -> NOTEQUAL .
+
+    IDF             reduce using rule 54 (COMPARISON_OPERATOR -> NOTEQUAL .)
+    LPAREN          reduce using rule 54 (COMPARISON_OPERATOR -> NOTEQUAL .)
+    integer_value   reduce using rule 54 (COMPARISON_OPERATOR -> NOTEQUAL .)
+    numeric_value   reduce using rule 54 (COMPARISON_OPERATOR -> NOTEQUAL .)
+
+
+state 102
+
+    (41) ARITHMETICAL_EXPRESSION -> IDF LBRACKET . ARITHMETICAL_EXPRESSION RBRACKET
+    (34) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION
+    (35) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION
+    (36) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION
+    (37) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION
+    (38) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION
+    (39) ARITHMETICAL_EXPRESSION -> . VALUE
+    (40) ARITHMETICAL_EXPRESSION -> . IDF
+    (41) ARITHMETICAL_EXPRESSION -> . IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET
+    (42) ARITHMETICAL_EXPRESSION -> . LPAREN ARITHMETICAL_EXPRESSION RPAREN
+    (57) VALUE -> . integer_value
+    (58) VALUE -> . numeric_value
+
+    IDF             shift and go to state 57
+    LPAREN          shift and go to state 126
+    integer_value   shift and go to state 60
+    numeric_value   shift and go to state 61
+
+    ARITHMETICAL_EXPRESSION        shift and go to state 132
+    VALUE                          shift and go to state 56
+
+state 103
+
+    (42) ARITHMETICAL_EXPRESSION -> LPAREN ARITHMETICAL_EXPRESSION . RPAREN
+    (34) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . ADD ARITHMETICAL_EXPRESSION
+    (35) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . SUB ARITHMETICAL_EXPRESSION
+    (36) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . MUL ARITHMETICAL_EXPRESSION
+    (37) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . DIV ARITHMETICAL_EXPRESSION
+    (38) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . MOD ARITHMETICAL_EXPRESSION
+    (43) COMPARE_EXPRESSION -> ARITHMETICAL_EXPRESSION . COMPARISON_OPERATOR ARITHMETICAL_EXPRESSION
+    (31) EXPR -> ARITHMETICAL_EXPRESSION .
+    (49) COMPARISON_OPERATOR -> . SUP
+    (50) COMPARISON_OPERATOR -> . INF
+    (51) COMPARISON_OPERATOR -> . SUPEQUAL
+    (52) COMPARISON_OPERATOR -> . INFEQUAL
+    (53) COMPARISON_OPERATOR -> . EEQUAL
+    (54) COMPARISON_OPERATOR -> . NOTEQUAL
+
+    RPAREN          shift and go to state 133
+    ADD             shift and go to state 90
+    SUB             shift and go to state 91
+    MUL             shift and go to state 92
+    DIV             shift and go to state 93
+    MOD             shift and go to state 94
+    AND             reduce using rule 31 (EXPR -> ARITHMETICAL_EXPRESSION .)
+    OR              reduce using rule 31 (EXPR -> ARITHMETICAL_EXPRESSION .)
+    SUP             shift and go to state 96
+    INF             shift and go to state 97
+    SUPEQUAL        shift and go to state 98
+    INFEQUAL        shift and go to state 99
+    EEQUAL          shift and go to state 100
+    NOTEQUAL        shift and go to state 101
+
+    COMPARISON_OPERATOR            shift and go to state 95
+
+state 104
+
+    (44) COMPARE_EXPRESSION -> LPAREN COMPARE_EXPRESSION . RPAREN
+    (32) EXPR -> COMPARE_EXPRESSION .
+
+    RPAREN          shift and go to state 134
+    AND             reduce using rule 32 (EXPR -> COMPARE_EXPRESSION .)
+    OR              reduce using rule 32 (EXPR -> COMPARE_EXPRESSION .)
+    COMMA           reduce using rule 32 (EXPR -> COMPARE_EXPRESSION .)
+
+
+state 105
+
+    (48) LOGICAL_EXPRESSION -> LPAREN LOGICAL_EXPRESSION . RPAREN
+    (33) EXPR -> LOGICAL_EXPRESSION .
+
+    RPAREN          shift and go to state 135
+    AND             reduce using rule 33 (EXPR -> LOGICAL_EXPRESSION .)
+    OR              reduce using rule 33 (EXPR -> LOGICAL_EXPRESSION .)
+    COMMA           reduce using rule 33 (EXPR -> LOGICAL_EXPRESSION .)
+
+
+state 106
+
+    (45) LOGICAL_EXPRESSION -> EXPR . AND EXPR
+    (46) LOGICAL_EXPRESSION -> EXPR . OR EXPR
+
+    AND             shift and go to state 88
+    OR              shift and go to state 89
+
+
+state 107
+
+    (64) IF_INSTRUCTION -> IF_CONDITION NEWLINE LACCO . NEWLINE INSTRUCTION_BLOCK RACCO
+
+    NEWLINE         shift and go to state 136
+
+
+state 108
+
+    (65) IF_INSTRUCTION -> ELSE_IF_CONDITION LACCO NEWLINE . INSTRUCTION_BLOCK RACCO
+    (3) INSTRUCTION_BLOCK -> . INSTRUCTION_BLOCK INST NEWLINE
+    (4) INSTRUCTION_BLOCK -> . INST NEWLINE
+    (5) INSTRUCTION_BLOCK -> . IF_CLAUSE
+    (6) INSTRUCTION_BLOCK -> . WHILE_INSTRUCTION
+    (7) INSTRUCTION_BLOCK -> . FOR_INSTRUCTION
+    (8) INSTRUCTION_BLOCK -> . INSTRUCTION_BLOCK IF_CLAUSE
+    (9) INSTRUCTION_BLOCK -> . INSTRUCTION_BLOCK WHILE_INSTRUCTION
+    (10) INSTRUCTION_BLOCK -> . INSTRUCTION_BLOCK FOR_INSTRUCTION
+    (11) INST -> . DECLARATION
+    (12) INST -> . AFFECT
+    (13) INST -> . AFFECT_COND
+    (14) INST -> . INCR
+    (15) INST -> . DECR
+    (16) INST -> . COMMENT
+    (62) IF_CLAUSE -> . IF_INSTRUCTION NEWLINE
+    (63) IF_CLAUSE -> . IF_ELSE_BLOC INSTRUCTION_BLOCK RACCO NEWLINE
+    (70) WHILE_INSTRUCTION -> . WHILE_COND LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+    (73) FOR_INSTRUCTION -> . FOR_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+    (21) DECLARATION -> . TYPE AFFECT
+    (22) DECLARATION -> . DECLARATION_MULTIPLE
+    (25) DECLARATION -> . ARRAY_DECLARATION
+    (19) AFFECT -> . IDF EQUAL EXPR
+    (20) AFFECT -> . IDF EQUAL character_value
+    (59) AFFECT_COND -> . AFF_COND_EXP EXPR RPAREN
+    (17) INCR -> . IDF INC integer_value
+    (18) DECR -> . IDF DEC integer_value
+    (64) IF_INSTRUCTION -> . IF_CONDITION NEWLINE LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+    (65) IF_INSTRUCTION -> . ELSE_IF_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+    (67) IF_ELSE_BLOC -> . IF_INSTRUCTION NEWLINE ELSE NEWLINE LACCO NEWLINE
+    (71) WHILE_COND -> . WHILE_START LPAREN EXPR RPAREN NEWLINE
+    (74) FOR_CONDITION -> . FOR_START for_int RPAREN NEWLINE
+    (27) TYPE -> . INTEGER
+    (28) TYPE -> . NUMERIC
+    (29) TYPE -> . CHARACTER
+    (30) TYPE -> . LOGICAL
+    (23) DECLARATION_MULTIPLE -> . TYPE IDF
+    (24) DECLARATION_MULTIPLE -> . DECLARATION_MULTIPLE COMMA IDF
+    (26) ARRAY_DECLARATION -> . TYPE IDF LBRACKET integer_value RBRACKET
+    (60) AFF_COND_EXP -> . AFF_COND_DEB EXPR COMMA
+    (66) IF_CONDITION -> . IF LPAREN EXPR RPAREN
+    (69) ELSE_IF_CONDITION -> . ELSE_IF LPAREN EXPR RPAREN NEWLINE
+    (72) WHILE_START -> . WHILE
+    (75) FOR_START -> . FOR LPAREN IDF IN for_int COLON
+    (61) AFF_COND_DEB -> . IDF EQUAL LPAREN EXPR COMMA
+    (68) ELSE_IF -> . IF_INSTRUCTION NEWLINE ELSE IF
+
+    COMMENT         shift and go to state 13
+    IDF             shift and go to state 21
+    INTEGER         shift and go to state 27
+    NUMERIC         shift and go to state 28
+    CHARACTER       shift and go to state 29
+    LOGICAL         shift and go to state 30
+    IF              shift and go to state 32
+    WHILE           shift and go to state 34
+    FOR             shift and go to state 35
+
+    ELSE_IF_CONDITION              shift and go to state 24
+    INSTRUCTION_BLOCK              shift and go to state 137
+    INST                           shift and go to state 4
+    IF_CLAUSE                      shift and go to state 5
+    WHILE_INSTRUCTION              shift and go to state 6
+    FOR_INSTRUCTION                shift and go to state 7
+    DECLARATION                    shift and go to state 8
+    AFFECT                         shift and go to state 9
+    AFFECT_COND                    shift and go to state 10
+    INCR                           shift and go to state 11
+    DECR                           shift and go to state 12
+    IF_INSTRUCTION                 shift and go to state 14
+    IF_ELSE_BLOC                   shift and go to state 15
+    WHILE_COND                     shift and go to state 16
+    FOR_CONDITION                  shift and go to state 17
+    TYPE                           shift and go to state 18
+    DECLARATION_MULTIPLE           shift and go to state 19
+    ARRAY_DECLARATION              shift and go to state 20
+    AFF_COND_EXP                   shift and go to state 22
+    IF_CONDITION                   shift and go to state 23
+    WHILE_START                    shift and go to state 25
+    FOR_START                      shift and go to state 26
+    AFF_COND_DEB                   shift and go to state 31
+    ELSE_IF                        shift and go to state 33
+
+state 109
+
+    (71) WHILE_COND -> WHILE_START LPAREN EXPR . RPAREN NEWLINE
+    (45) LOGICAL_EXPRESSION -> EXPR . AND EXPR
+    (46) LOGICAL_EXPRESSION -> EXPR . OR EXPR
+
+    RPAREN          shift and go to state 138
+    AND             shift and go to state 88
+    OR              shift and go to state 89
+
+
+state 110
+
+    (74) FOR_CONDITION -> FOR_START for_int RPAREN . NEWLINE
+
+    NEWLINE         shift and go to state 139
+
+
+state 111
+
+    (60) AFF_COND_EXP -> AFF_COND_DEB EXPR COMMA .
+
+    IDF             reduce using rule 60 (AFF_COND_EXP -> AFF_COND_DEB EXPR COMMA .)
+    LPAREN          reduce using rule 60 (AFF_COND_EXP -> AFF_COND_DEB EXPR COMMA .)
+    integer_value   reduce using rule 60 (AFF_COND_EXP -> AFF_COND_DEB EXPR COMMA .)
+    numeric_value   reduce using rule 60 (AFF_COND_EXP -> AFF_COND_DEB EXPR COMMA .)
+    TRUE            reduce using rule 60 (AFF_COND_EXP -> AFF_COND_DEB EXPR COMMA .)
+    FALSE           reduce using rule 60 (AFF_COND_EXP -> AFF_COND_DEB EXPR COMMA .)
+
+
+state 112
+
+    (66) IF_CONDITION -> IF LPAREN EXPR . RPAREN
+    (45) LOGICAL_EXPRESSION -> EXPR . AND EXPR
+    (46) LOGICAL_EXPRESSION -> EXPR . OR EXPR
+
+    RPAREN          shift and go to state 140
+    AND             shift and go to state 88
+    OR              shift and go to state 89
+
+
+state 113
+
+    (69) ELSE_IF_CONDITION -> ELSE_IF LPAREN EXPR . RPAREN NEWLINE
+    (45) LOGICAL_EXPRESSION -> EXPR . AND EXPR
+    (46) LOGICAL_EXPRESSION -> EXPR . OR EXPR
+
+    RPAREN          shift and go to state 141
+    AND             shift and go to state 88
+    OR              shift and go to state 89
+
+
+state 114
+
+    (75) FOR_START -> FOR LPAREN IDF . IN for_int COLON
+
+    IN              shift and go to state 142
+
+
+state 115
+
+    (67) IF_ELSE_BLOC -> IF_INSTRUCTION NEWLINE ELSE NEWLINE . LACCO NEWLINE
+
+    LACCO           shift and go to state 143
+
+
+state 116
+
+    (68) ELSE_IF -> IF_INSTRUCTION NEWLINE ELSE IF .
+
+    LPAREN          reduce using rule 68 (ELSE_IF -> IF_INSTRUCTION NEWLINE ELSE IF .)
+
+
+state 117
+
+    (63) IF_CLAUSE -> IF_ELSE_BLOC INSTRUCTION_BLOCK RACCO NEWLINE .
+
+    COMMENT         reduce using rule 63 (IF_CLAUSE -> IF_ELSE_BLOC INSTRUCTION_BLOCK RACCO NEWLINE .)
+    IDF             reduce using rule 63 (IF_CLAUSE -> IF_ELSE_BLOC INSTRUCTION_BLOCK RACCO NEWLINE .)
+    INTEGER         reduce using rule 63 (IF_CLAUSE -> IF_ELSE_BLOC INSTRUCTION_BLOCK RACCO NEWLINE .)
+    NUMERIC         reduce using rule 63 (IF_CLAUSE -> IF_ELSE_BLOC INSTRUCTION_BLOCK RACCO NEWLINE .)
+    CHARACTER       reduce using rule 63 (IF_CLAUSE -> IF_ELSE_BLOC INSTRUCTION_BLOCK RACCO NEWLINE .)
+    LOGICAL         reduce using rule 63 (IF_CLAUSE -> IF_ELSE_BLOC INSTRUCTION_BLOCK RACCO NEWLINE .)
+    IF              reduce using rule 63 (IF_CLAUSE -> IF_ELSE_BLOC INSTRUCTION_BLOCK RACCO NEWLINE .)
+    WHILE           reduce using rule 63 (IF_CLAUSE -> IF_ELSE_BLOC INSTRUCTION_BLOCK RACCO NEWLINE .)
+    FOR             reduce using rule 63 (IF_CLAUSE -> IF_ELSE_BLOC INSTRUCTION_BLOCK RACCO NEWLINE .)
+    $end            reduce using rule 63 (IF_CLAUSE -> IF_ELSE_BLOC INSTRUCTION_BLOCK RACCO NEWLINE .)
+    RACCO           reduce using rule 63 (IF_CLAUSE -> IF_ELSE_BLOC INSTRUCTION_BLOCK RACCO NEWLINE .)
+
+
+state 118
+
+    (70) WHILE_INSTRUCTION -> WHILE_COND LACCO NEWLINE INSTRUCTION_BLOCK . RACCO NEWLINE
+    (3) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK . INST NEWLINE
+    (8) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK . IF_CLAUSE
+    (9) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK . WHILE_INSTRUCTION
+    (10) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK . FOR_INSTRUCTION
+    (11) INST -> . DECLARATION
+    (12) INST -> . AFFECT
+    (13) INST -> . AFFECT_COND
+    (14) INST -> . INCR
+    (15) INST -> . DECR
+    (16) INST -> . COMMENT
+    (62) IF_CLAUSE -> . IF_INSTRUCTION NEWLINE
+    (63) IF_CLAUSE -> . IF_ELSE_BLOC INSTRUCTION_BLOCK RACCO NEWLINE
+    (70) WHILE_INSTRUCTION -> . WHILE_COND LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+    (73) FOR_INSTRUCTION -> . FOR_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+    (21) DECLARATION -> . TYPE AFFECT
+    (22) DECLARATION -> . DECLARATION_MULTIPLE
+    (25) DECLARATION -> . ARRAY_DECLARATION
+    (19) AFFECT -> . IDF EQUAL EXPR
+    (20) AFFECT -> . IDF EQUAL character_value
+    (59) AFFECT_COND -> . AFF_COND_EXP EXPR RPAREN
+    (17) INCR -> . IDF INC integer_value
+    (18) DECR -> . IDF DEC integer_value
+    (64) IF_INSTRUCTION -> . IF_CONDITION NEWLINE LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+    (65) IF_INSTRUCTION -> . ELSE_IF_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+    (67) IF_ELSE_BLOC -> . IF_INSTRUCTION NEWLINE ELSE NEWLINE LACCO NEWLINE
+    (71) WHILE_COND -> . WHILE_START LPAREN EXPR RPAREN NEWLINE
+    (74) FOR_CONDITION -> . FOR_START for_int RPAREN NEWLINE
+    (27) TYPE -> . INTEGER
+    (28) TYPE -> . NUMERIC
+    (29) TYPE -> . CHARACTER
+    (30) TYPE -> . LOGICAL
+    (23) DECLARATION_MULTIPLE -> . TYPE IDF
+    (24) DECLARATION_MULTIPLE -> . DECLARATION_MULTIPLE COMMA IDF
+    (26) ARRAY_DECLARATION -> . TYPE IDF LBRACKET integer_value RBRACKET
+    (60) AFF_COND_EXP -> . AFF_COND_DEB EXPR COMMA
+    (66) IF_CONDITION -> . IF LPAREN EXPR RPAREN
+    (69) ELSE_IF_CONDITION -> . ELSE_IF LPAREN EXPR RPAREN NEWLINE
+    (72) WHILE_START -> . WHILE
+    (75) FOR_START -> . FOR LPAREN IDF IN for_int COLON
+    (61) AFF_COND_DEB -> . IDF EQUAL LPAREN EXPR COMMA
+    (68) ELSE_IF -> . IF_INSTRUCTION NEWLINE ELSE IF
+
+    RACCO           shift and go to state 144
+    COMMENT         shift and go to state 13
+    IDF             shift and go to state 21
+    INTEGER         shift and go to state 27
+    NUMERIC         shift and go to state 28
+    CHARACTER       shift and go to state 29
+    LOGICAL         shift and go to state 30
+    IF              shift and go to state 32
+    WHILE           shift and go to state 34
+    FOR             shift and go to state 35
+
+    WHILE_COND                     shift and go to state 16
+    INST                           shift and go to state 36
+    IF_CLAUSE                      shift and go to state 37
+    WHILE_INSTRUCTION              shift and go to state 38
+    FOR_INSTRUCTION                shift and go to state 39
+    DECLARATION                    shift and go to state 8
+    AFFECT                         shift and go to state 9
+    AFFECT_COND                    shift and go to state 10
+    INCR                           shift and go to state 11
+    DECR                           shift and go to state 12
+    IF_INSTRUCTION                 shift and go to state 14
+    IF_ELSE_BLOC                   shift and go to state 15
+    FOR_CONDITION                  shift and go to state 17
+    TYPE                           shift and go to state 18
+    DECLARATION_MULTIPLE           shift and go to state 19
+    ARRAY_DECLARATION              shift and go to state 20
+    AFF_COND_EXP                   shift and go to state 22
+    IF_CONDITION                   shift and go to state 23
+    ELSE_IF_CONDITION              shift and go to state 24
+    WHILE_START                    shift and go to state 25
+    FOR_START                      shift and go to state 26
+    AFF_COND_DEB                   shift and go to state 31
+    ELSE_IF                        shift and go to state 33
+
+state 119
+
+    (73) FOR_INSTRUCTION -> FOR_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK . RACCO NEWLINE
+    (3) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK . INST NEWLINE
+    (8) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK . IF_CLAUSE
+    (9) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK . WHILE_INSTRUCTION
+    (10) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK . FOR_INSTRUCTION
+    (11) INST -> . DECLARATION
+    (12) INST -> . AFFECT
+    (13) INST -> . AFFECT_COND
+    (14) INST -> . INCR
+    (15) INST -> . DECR
+    (16) INST -> . COMMENT
+    (62) IF_CLAUSE -> . IF_INSTRUCTION NEWLINE
+    (63) IF_CLAUSE -> . IF_ELSE_BLOC INSTRUCTION_BLOCK RACCO NEWLINE
+    (70) WHILE_INSTRUCTION -> . WHILE_COND LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+    (73) FOR_INSTRUCTION -> . FOR_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+    (21) DECLARATION -> . TYPE AFFECT
+    (22) DECLARATION -> . DECLARATION_MULTIPLE
+    (25) DECLARATION -> . ARRAY_DECLARATION
+    (19) AFFECT -> . IDF EQUAL EXPR
+    (20) AFFECT -> . IDF EQUAL character_value
+    (59) AFFECT_COND -> . AFF_COND_EXP EXPR RPAREN
+    (17) INCR -> . IDF INC integer_value
+    (18) DECR -> . IDF DEC integer_value
+    (64) IF_INSTRUCTION -> . IF_CONDITION NEWLINE LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+    (65) IF_INSTRUCTION -> . ELSE_IF_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+    (67) IF_ELSE_BLOC -> . IF_INSTRUCTION NEWLINE ELSE NEWLINE LACCO NEWLINE
+    (71) WHILE_COND -> . WHILE_START LPAREN EXPR RPAREN NEWLINE
+    (74) FOR_CONDITION -> . FOR_START for_int RPAREN NEWLINE
+    (27) TYPE -> . INTEGER
+    (28) TYPE -> . NUMERIC
+    (29) TYPE -> . CHARACTER
+    (30) TYPE -> . LOGICAL
+    (23) DECLARATION_MULTIPLE -> . TYPE IDF
+    (24) DECLARATION_MULTIPLE -> . DECLARATION_MULTIPLE COMMA IDF
+    (26) ARRAY_DECLARATION -> . TYPE IDF LBRACKET integer_value RBRACKET
+    (60) AFF_COND_EXP -> . AFF_COND_DEB EXPR COMMA
+    (66) IF_CONDITION -> . IF LPAREN EXPR RPAREN
+    (69) ELSE_IF_CONDITION -> . ELSE_IF LPAREN EXPR RPAREN NEWLINE
+    (72) WHILE_START -> . WHILE
+    (75) FOR_START -> . FOR LPAREN IDF IN for_int COLON
+    (61) AFF_COND_DEB -> . IDF EQUAL LPAREN EXPR COMMA
+    (68) ELSE_IF -> . IF_INSTRUCTION NEWLINE ELSE IF
+
+    RACCO           shift and go to state 145
+    COMMENT         shift and go to state 13
+    IDF             shift and go to state 21
+    INTEGER         shift and go to state 27
+    NUMERIC         shift and go to state 28
+    CHARACTER       shift and go to state 29
+    LOGICAL         shift and go to state 30
+    IF              shift and go to state 32
+    WHILE           shift and go to state 34
+    FOR             shift and go to state 35
+
+    FOR_CONDITION                  shift and go to state 17
+    INST                           shift and go to state 36
+    IF_CLAUSE                      shift and go to state 37
+    WHILE_INSTRUCTION              shift and go to state 38
+    FOR_INSTRUCTION                shift and go to state 39
+    DECLARATION                    shift and go to state 8
+    AFFECT                         shift and go to state 9
+    AFFECT_COND                    shift and go to state 10
+    INCR                           shift and go to state 11
+    DECR                           shift and go to state 12
+    IF_INSTRUCTION                 shift and go to state 14
+    IF_ELSE_BLOC                   shift and go to state 15
+    WHILE_COND                     shift and go to state 16
+    TYPE                           shift and go to state 18
+    DECLARATION_MULTIPLE           shift and go to state 19
+    ARRAY_DECLARATION              shift and go to state 20
+    AFF_COND_EXP                   shift and go to state 22
+    IF_CONDITION                   shift and go to state 23
+    ELSE_IF_CONDITION              shift and go to state 24
+    WHILE_START                    shift and go to state 25
+    FOR_START                      shift and go to state 26
+    AFF_COND_DEB                   shift and go to state 31
+    ELSE_IF                        shift and go to state 33
+
+state 120
+
+    (26) ARRAY_DECLARATION -> TYPE IDF LBRACKET integer_value . RBRACKET
+
+    RBRACKET        shift and go to state 146
+
+
+state 121
+
+    (61) AFF_COND_DEB -> IDF EQUAL LPAREN EXPR . COMMA
+    (45) LOGICAL_EXPRESSION -> EXPR . AND EXPR
+    (46) LOGICAL_EXPRESSION -> EXPR . OR EXPR
+
+    COMMA           shift and go to state 147
+    AND             shift and go to state 88
+    OR              shift and go to state 89
+
+
+state 122
+
+    (42) ARITHMETICAL_EXPRESSION -> LPAREN ARITHMETICAL_EXPRESSION . RPAREN
+    (31) EXPR -> ARITHMETICAL_EXPRESSION .
+    (34) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . ADD ARITHMETICAL_EXPRESSION
+    (35) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . SUB ARITHMETICAL_EXPRESSION
+    (36) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . MUL ARITHMETICAL_EXPRESSION
+    (37) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . DIV ARITHMETICAL_EXPRESSION
+    (38) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . MOD ARITHMETICAL_EXPRESSION
+    (43) COMPARE_EXPRESSION -> ARITHMETICAL_EXPRESSION . COMPARISON_OPERATOR ARITHMETICAL_EXPRESSION
+    (49) COMPARISON_OPERATOR -> . SUP
+    (50) COMPARISON_OPERATOR -> . INF
+    (51) COMPARISON_OPERATOR -> . SUPEQUAL
+    (52) COMPARISON_OPERATOR -> . INFEQUAL
+    (53) COMPARISON_OPERATOR -> . EEQUAL
+    (54) COMPARISON_OPERATOR -> . NOTEQUAL
+
+    RPAREN          shift and go to state 133
+    COMMA           reduce using rule 31 (EXPR -> ARITHMETICAL_EXPRESSION .)
+    AND             reduce using rule 31 (EXPR -> ARITHMETICAL_EXPRESSION .)
+    OR              reduce using rule 31 (EXPR -> ARITHMETICAL_EXPRESSION .)
+    ADD             shift and go to state 90
+    SUB             shift and go to state 91
+    MUL             shift and go to state 92
+    DIV             shift and go to state 93
+    MOD             shift and go to state 94
+    SUP             shift and go to state 96
+    INF             shift and go to state 97
+    SUPEQUAL        shift and go to state 98
+    INFEQUAL        shift and go to state 99
+    EEQUAL          shift and go to state 100
+    NOTEQUAL        shift and go to state 101
+
+    COMPARISON_OPERATOR            shift and go to state 95
+
+state 123
+
+    (45) LOGICAL_EXPRESSION -> EXPR AND EXPR .
+    (45) LOGICAL_EXPRESSION -> EXPR . AND EXPR
+    (46) LOGICAL_EXPRESSION -> EXPR . OR EXPR
+
+    RPAREN          reduce using rule 45 (LOGICAL_EXPRESSION -> EXPR AND EXPR .)
+    AND             reduce using rule 45 (LOGICAL_EXPRESSION -> EXPR AND EXPR .)
+    OR              reduce using rule 45 (LOGICAL_EXPRESSION -> EXPR AND EXPR .)
+    COMMA           reduce using rule 45 (LOGICAL_EXPRESSION -> EXPR AND EXPR .)
+    NEWLINE         reduce using rule 45 (LOGICAL_EXPRESSION -> EXPR AND EXPR .)
+
+  ! AND             [ shift and go to state 88 ]
+  ! OR              [ shift and go to state 89 ]
+
+
+state 124
+
+    (46) LOGICAL_EXPRESSION -> EXPR OR EXPR .
+    (45) LOGICAL_EXPRESSION -> EXPR . AND EXPR
+    (46) LOGICAL_EXPRESSION -> EXPR . OR EXPR
+
+    RPAREN          reduce using rule 46 (LOGICAL_EXPRESSION -> EXPR OR EXPR .)
+    OR              reduce using rule 46 (LOGICAL_EXPRESSION -> EXPR OR EXPR .)
+    COMMA           reduce using rule 46 (LOGICAL_EXPRESSION -> EXPR OR EXPR .)
+    NEWLINE         reduce using rule 46 (LOGICAL_EXPRESSION -> EXPR OR EXPR .)
+    AND             shift and go to state 88
+
+  ! AND             [ reduce using rule 46 (LOGICAL_EXPRESSION -> EXPR OR EXPR .) ]
+  ! OR              [ shift and go to state 89 ]
+
+
+state 125
+
+    (34) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION .
+    (34) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . ADD ARITHMETICAL_EXPRESSION
+    (35) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . SUB ARITHMETICAL_EXPRESSION
+    (36) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . MUL ARITHMETICAL_EXPRESSION
+    (37) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . DIV ARITHMETICAL_EXPRESSION
+    (38) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . MOD ARITHMETICAL_EXPRESSION
+
+    ADD             reduce using rule 34 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION .)
+    SUB             reduce using rule 34 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION .)
+    SUP             reduce using rule 34 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION .)
+    INF             reduce using rule 34 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION .)
+    SUPEQUAL        reduce using rule 34 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION .)
+    INFEQUAL        reduce using rule 34 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION .)
+    EEQUAL          reduce using rule 34 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION .)
+    NOTEQUAL        reduce using rule 34 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION .)
+    RPAREN          reduce using rule 34 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION .)
+    AND             reduce using rule 34 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION .)
+    OR              reduce using rule 34 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION .)
+    COMMA           reduce using rule 34 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION .)
+    NEWLINE         reduce using rule 34 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION .)
+    RBRACKET        reduce using rule 34 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION .)
+    MUL             shift and go to state 92
+    DIV             shift and go to state 93
+    MOD             shift and go to state 94
+
+  ! MUL             [ reduce using rule 34 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION .) ]
+  ! DIV             [ reduce using rule 34 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION .) ]
+  ! MOD             [ reduce using rule 34 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION .) ]
+  ! ADD             [ shift and go to state 90 ]
+  ! SUB             [ shift and go to state 91 ]
+
+
+state 126
+
+    (42) ARITHMETICAL_EXPRESSION -> LPAREN . ARITHMETICAL_EXPRESSION RPAREN
+    (34) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION ADD ARITHMETICAL_EXPRESSION
+    (35) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION
+    (36) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION
+    (37) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION
+    (38) ARITHMETICAL_EXPRESSION -> . ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION
+    (39) ARITHMETICAL_EXPRESSION -> . VALUE
+    (40) ARITHMETICAL_EXPRESSION -> . IDF
+    (41) ARITHMETICAL_EXPRESSION -> . IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET
+    (42) ARITHMETICAL_EXPRESSION -> . LPAREN ARITHMETICAL_EXPRESSION RPAREN
+    (57) VALUE -> . integer_value
+    (58) VALUE -> . numeric_value
+
+    IDF             shift and go to state 57
+    LPAREN          shift and go to state 126
+    integer_value   shift and go to state 60
+    numeric_value   shift and go to state 61
+
+    ARITHMETICAL_EXPRESSION        shift and go to state 148
+    VALUE                          shift and go to state 56
+
+state 127
+
+    (35) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION .
+    (34) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . ADD ARITHMETICAL_EXPRESSION
+    (35) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . SUB ARITHMETICAL_EXPRESSION
+    (36) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . MUL ARITHMETICAL_EXPRESSION
+    (37) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . DIV ARITHMETICAL_EXPRESSION
+    (38) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . MOD ARITHMETICAL_EXPRESSION
+
+    ADD             reduce using rule 35 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION .)
+    SUB             reduce using rule 35 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION .)
+    SUP             reduce using rule 35 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION .)
+    INF             reduce using rule 35 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION .)
+    SUPEQUAL        reduce using rule 35 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION .)
+    INFEQUAL        reduce using rule 35 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION .)
+    EEQUAL          reduce using rule 35 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION .)
+    NOTEQUAL        reduce using rule 35 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION .)
+    RPAREN          reduce using rule 35 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION .)
+    AND             reduce using rule 35 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION .)
+    OR              reduce using rule 35 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION .)
+    COMMA           reduce using rule 35 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION .)
+    NEWLINE         reduce using rule 35 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION .)
+    RBRACKET        reduce using rule 35 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION .)
+    MUL             shift and go to state 92
+    DIV             shift and go to state 93
+    MOD             shift and go to state 94
+
+  ! MUL             [ reduce using rule 35 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION .) ]
+  ! DIV             [ reduce using rule 35 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION .) ]
+  ! MOD             [ reduce using rule 35 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION SUB ARITHMETICAL_EXPRESSION .) ]
+  ! ADD             [ shift and go to state 90 ]
+  ! SUB             [ shift and go to state 91 ]
+
+
+state 128
+
+    (36) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION .
+    (34) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . ADD ARITHMETICAL_EXPRESSION
+    (35) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . SUB ARITHMETICAL_EXPRESSION
+    (36) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . MUL ARITHMETICAL_EXPRESSION
+    (37) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . DIV ARITHMETICAL_EXPRESSION
+    (38) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . MOD ARITHMETICAL_EXPRESSION
+
+    ADD             reduce using rule 36 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION .)
+    SUB             reduce using rule 36 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION .)
+    MUL             reduce using rule 36 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION .)
+    DIV             reduce using rule 36 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION .)
+    MOD             reduce using rule 36 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION .)
+    SUP             reduce using rule 36 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION .)
+    INF             reduce using rule 36 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION .)
+    SUPEQUAL        reduce using rule 36 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION .)
+    INFEQUAL        reduce using rule 36 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION .)
+    EEQUAL          reduce using rule 36 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION .)
+    NOTEQUAL        reduce using rule 36 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION .)
+    RPAREN          reduce using rule 36 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION .)
+    AND             reduce using rule 36 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION .)
+    OR              reduce using rule 36 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION .)
+    COMMA           reduce using rule 36 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION .)
+    NEWLINE         reduce using rule 36 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION .)
+    RBRACKET        reduce using rule 36 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MUL ARITHMETICAL_EXPRESSION .)
+
+  ! ADD             [ shift and go to state 90 ]
+  ! SUB             [ shift and go to state 91 ]
+  ! MUL             [ shift and go to state 92 ]
+  ! DIV             [ shift and go to state 93 ]
+  ! MOD             [ shift and go to state 94 ]
+
+
+state 129
+
+    (37) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION .
+    (34) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . ADD ARITHMETICAL_EXPRESSION
+    (35) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . SUB ARITHMETICAL_EXPRESSION
+    (36) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . MUL ARITHMETICAL_EXPRESSION
+    (37) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . DIV ARITHMETICAL_EXPRESSION
+    (38) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . MOD ARITHMETICAL_EXPRESSION
+
+    ADD             reduce using rule 37 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION .)
+    SUB             reduce using rule 37 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION .)
+    MUL             reduce using rule 37 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION .)
+    DIV             reduce using rule 37 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION .)
+    MOD             reduce using rule 37 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION .)
+    SUP             reduce using rule 37 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION .)
+    INF             reduce using rule 37 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION .)
+    SUPEQUAL        reduce using rule 37 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION .)
+    INFEQUAL        reduce using rule 37 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION .)
+    EEQUAL          reduce using rule 37 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION .)
+    NOTEQUAL        reduce using rule 37 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION .)
+    RPAREN          reduce using rule 37 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION .)
+    AND             reduce using rule 37 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION .)
+    OR              reduce using rule 37 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION .)
+    COMMA           reduce using rule 37 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION .)
+    NEWLINE         reduce using rule 37 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION .)
+    RBRACKET        reduce using rule 37 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION DIV ARITHMETICAL_EXPRESSION .)
+
+  ! ADD             [ shift and go to state 90 ]
+  ! SUB             [ shift and go to state 91 ]
+  ! MUL             [ shift and go to state 92 ]
+  ! DIV             [ shift and go to state 93 ]
+  ! MOD             [ shift and go to state 94 ]
+
+
+state 130
+
+    (38) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION .
+    (34) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . ADD ARITHMETICAL_EXPRESSION
+    (35) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . SUB ARITHMETICAL_EXPRESSION
+    (36) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . MUL ARITHMETICAL_EXPRESSION
+    (37) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . DIV ARITHMETICAL_EXPRESSION
+    (38) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . MOD ARITHMETICAL_EXPRESSION
+
+    ADD             reduce using rule 38 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION .)
+    SUB             reduce using rule 38 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION .)
+    MUL             reduce using rule 38 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION .)
+    DIV             reduce using rule 38 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION .)
+    MOD             reduce using rule 38 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION .)
+    SUP             reduce using rule 38 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION .)
+    INF             reduce using rule 38 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION .)
+    SUPEQUAL        reduce using rule 38 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION .)
+    INFEQUAL        reduce using rule 38 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION .)
+    EEQUAL          reduce using rule 38 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION .)
+    NOTEQUAL        reduce using rule 38 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION .)
+    RPAREN          reduce using rule 38 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION .)
+    AND             reduce using rule 38 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION .)
+    OR              reduce using rule 38 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION .)
+    COMMA           reduce using rule 38 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION .)
+    NEWLINE         reduce using rule 38 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION .)
+    RBRACKET        reduce using rule 38 (ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION MOD ARITHMETICAL_EXPRESSION .)
+
+  ! ADD             [ shift and go to state 90 ]
+  ! SUB             [ shift and go to state 91 ]
+  ! MUL             [ shift and go to state 92 ]
+  ! DIV             [ shift and go to state 93 ]
+  ! MOD             [ shift and go to state 94 ]
+
+
+state 131
+
+    (43) COMPARE_EXPRESSION -> ARITHMETICAL_EXPRESSION COMPARISON_OPERATOR ARITHMETICAL_EXPRESSION .
+    (34) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . ADD ARITHMETICAL_EXPRESSION
+    (35) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . SUB ARITHMETICAL_EXPRESSION
+    (36) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . MUL ARITHMETICAL_EXPRESSION
+    (37) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . DIV ARITHMETICAL_EXPRESSION
+    (38) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . MOD ARITHMETICAL_EXPRESSION
+
+    RPAREN          reduce using rule 43 (COMPARE_EXPRESSION -> ARITHMETICAL_EXPRESSION COMPARISON_OPERATOR ARITHMETICAL_EXPRESSION .)
+    AND             reduce using rule 43 (COMPARE_EXPRESSION -> ARITHMETICAL_EXPRESSION COMPARISON_OPERATOR ARITHMETICAL_EXPRESSION .)
+    OR              reduce using rule 43 (COMPARE_EXPRESSION -> ARITHMETICAL_EXPRESSION COMPARISON_OPERATOR ARITHMETICAL_EXPRESSION .)
+    COMMA           reduce using rule 43 (COMPARE_EXPRESSION -> ARITHMETICAL_EXPRESSION COMPARISON_OPERATOR ARITHMETICAL_EXPRESSION .)
+    NEWLINE         reduce using rule 43 (COMPARE_EXPRESSION -> ARITHMETICAL_EXPRESSION COMPARISON_OPERATOR ARITHMETICAL_EXPRESSION .)
+    ADD             shift and go to state 90
+    SUB             shift and go to state 91
+    MUL             shift and go to state 92
+    DIV             shift and go to state 93
+    MOD             shift and go to state 94
+
+
+state 132
+
+    (41) ARITHMETICAL_EXPRESSION -> IDF LBRACKET ARITHMETICAL_EXPRESSION . RBRACKET
+    (34) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . ADD ARITHMETICAL_EXPRESSION
+    (35) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . SUB ARITHMETICAL_EXPRESSION
+    (36) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . MUL ARITHMETICAL_EXPRESSION
+    (37) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . DIV ARITHMETICAL_EXPRESSION
+    (38) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . MOD ARITHMETICAL_EXPRESSION
+
+    RBRACKET        shift and go to state 149
+    ADD             shift and go to state 90
+    SUB             shift and go to state 91
+    MUL             shift and go to state 92
+    DIV             shift and go to state 93
+    MOD             shift and go to state 94
+
+
+state 133
+
+    (42) ARITHMETICAL_EXPRESSION -> LPAREN ARITHMETICAL_EXPRESSION RPAREN .
+
+    ADD             reduce using rule 42 (ARITHMETICAL_EXPRESSION -> LPAREN ARITHMETICAL_EXPRESSION RPAREN .)
+    SUB             reduce using rule 42 (ARITHMETICAL_EXPRESSION -> LPAREN ARITHMETICAL_EXPRESSION RPAREN .)
+    MUL             reduce using rule 42 (ARITHMETICAL_EXPRESSION -> LPAREN ARITHMETICAL_EXPRESSION RPAREN .)
+    DIV             reduce using rule 42 (ARITHMETICAL_EXPRESSION -> LPAREN ARITHMETICAL_EXPRESSION RPAREN .)
+    MOD             reduce using rule 42 (ARITHMETICAL_EXPRESSION -> LPAREN ARITHMETICAL_EXPRESSION RPAREN .)
+    SUP             reduce using rule 42 (ARITHMETICAL_EXPRESSION -> LPAREN ARITHMETICAL_EXPRESSION RPAREN .)
+    INF             reduce using rule 42 (ARITHMETICAL_EXPRESSION -> LPAREN ARITHMETICAL_EXPRESSION RPAREN .)
+    SUPEQUAL        reduce using rule 42 (ARITHMETICAL_EXPRESSION -> LPAREN ARITHMETICAL_EXPRESSION RPAREN .)
+    INFEQUAL        reduce using rule 42 (ARITHMETICAL_EXPRESSION -> LPAREN ARITHMETICAL_EXPRESSION RPAREN .)
+    EEQUAL          reduce using rule 42 (ARITHMETICAL_EXPRESSION -> LPAREN ARITHMETICAL_EXPRESSION RPAREN .)
+    NOTEQUAL        reduce using rule 42 (ARITHMETICAL_EXPRESSION -> LPAREN ARITHMETICAL_EXPRESSION RPAREN .)
+    RPAREN          reduce using rule 42 (ARITHMETICAL_EXPRESSION -> LPAREN ARITHMETICAL_EXPRESSION RPAREN .)
+    AND             reduce using rule 42 (ARITHMETICAL_EXPRESSION -> LPAREN ARITHMETICAL_EXPRESSION RPAREN .)
+    OR              reduce using rule 42 (ARITHMETICAL_EXPRESSION -> LPAREN ARITHMETICAL_EXPRESSION RPAREN .)
+    COMMA           reduce using rule 42 (ARITHMETICAL_EXPRESSION -> LPAREN ARITHMETICAL_EXPRESSION RPAREN .)
+    NEWLINE         reduce using rule 42 (ARITHMETICAL_EXPRESSION -> LPAREN ARITHMETICAL_EXPRESSION RPAREN .)
+    RBRACKET        reduce using rule 42 (ARITHMETICAL_EXPRESSION -> LPAREN ARITHMETICAL_EXPRESSION RPAREN .)
+
+
+state 134
+
+    (44) COMPARE_EXPRESSION -> LPAREN COMPARE_EXPRESSION RPAREN .
+
+    RPAREN          reduce using rule 44 (COMPARE_EXPRESSION -> LPAREN COMPARE_EXPRESSION RPAREN .)
+    AND             reduce using rule 44 (COMPARE_EXPRESSION -> LPAREN COMPARE_EXPRESSION RPAREN .)
+    OR              reduce using rule 44 (COMPARE_EXPRESSION -> LPAREN COMPARE_EXPRESSION RPAREN .)
+    COMMA           reduce using rule 44 (COMPARE_EXPRESSION -> LPAREN COMPARE_EXPRESSION RPAREN .)
+    NEWLINE         reduce using rule 44 (COMPARE_EXPRESSION -> LPAREN COMPARE_EXPRESSION RPAREN .)
+
+
+state 135
+
+    (48) LOGICAL_EXPRESSION -> LPAREN LOGICAL_EXPRESSION RPAREN .
+
+    RPAREN          reduce using rule 48 (LOGICAL_EXPRESSION -> LPAREN LOGICAL_EXPRESSION RPAREN .)
+    AND             reduce using rule 48 (LOGICAL_EXPRESSION -> LPAREN LOGICAL_EXPRESSION RPAREN .)
+    OR              reduce using rule 48 (LOGICAL_EXPRESSION -> LPAREN LOGICAL_EXPRESSION RPAREN .)
+    COMMA           reduce using rule 48 (LOGICAL_EXPRESSION -> LPAREN LOGICAL_EXPRESSION RPAREN .)
+    NEWLINE         reduce using rule 48 (LOGICAL_EXPRESSION -> LPAREN LOGICAL_EXPRESSION RPAREN .)
+
+
+state 136
+
+    (64) IF_INSTRUCTION -> IF_CONDITION NEWLINE LACCO NEWLINE . INSTRUCTION_BLOCK RACCO
+    (3) INSTRUCTION_BLOCK -> . INSTRUCTION_BLOCK INST NEWLINE
+    (4) INSTRUCTION_BLOCK -> . INST NEWLINE
+    (5) INSTRUCTION_BLOCK -> . IF_CLAUSE
+    (6) INSTRUCTION_BLOCK -> . WHILE_INSTRUCTION
+    (7) INSTRUCTION_BLOCK -> . FOR_INSTRUCTION
+    (8) INSTRUCTION_BLOCK -> . INSTRUCTION_BLOCK IF_CLAUSE
+    (9) INSTRUCTION_BLOCK -> . INSTRUCTION_BLOCK WHILE_INSTRUCTION
+    (10) INSTRUCTION_BLOCK -> . INSTRUCTION_BLOCK FOR_INSTRUCTION
+    (11) INST -> . DECLARATION
+    (12) INST -> . AFFECT
+    (13) INST -> . AFFECT_COND
+    (14) INST -> . INCR
+    (15) INST -> . DECR
+    (16) INST -> . COMMENT
+    (62) IF_CLAUSE -> . IF_INSTRUCTION NEWLINE
+    (63) IF_CLAUSE -> . IF_ELSE_BLOC INSTRUCTION_BLOCK RACCO NEWLINE
+    (70) WHILE_INSTRUCTION -> . WHILE_COND LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+    (73) FOR_INSTRUCTION -> . FOR_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+    (21) DECLARATION -> . TYPE AFFECT
+    (22) DECLARATION -> . DECLARATION_MULTIPLE
+    (25) DECLARATION -> . ARRAY_DECLARATION
+    (19) AFFECT -> . IDF EQUAL EXPR
+    (20) AFFECT -> . IDF EQUAL character_value
+    (59) AFFECT_COND -> . AFF_COND_EXP EXPR RPAREN
+    (17) INCR -> . IDF INC integer_value
+    (18) DECR -> . IDF DEC integer_value
+    (64) IF_INSTRUCTION -> . IF_CONDITION NEWLINE LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+    (65) IF_INSTRUCTION -> . ELSE_IF_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+    (67) IF_ELSE_BLOC -> . IF_INSTRUCTION NEWLINE ELSE NEWLINE LACCO NEWLINE
+    (71) WHILE_COND -> . WHILE_START LPAREN EXPR RPAREN NEWLINE
+    (74) FOR_CONDITION -> . FOR_START for_int RPAREN NEWLINE
+    (27) TYPE -> . INTEGER
+    (28) TYPE -> . NUMERIC
+    (29) TYPE -> . CHARACTER
+    (30) TYPE -> . LOGICAL
+    (23) DECLARATION_MULTIPLE -> . TYPE IDF
+    (24) DECLARATION_MULTIPLE -> . DECLARATION_MULTIPLE COMMA IDF
+    (26) ARRAY_DECLARATION -> . TYPE IDF LBRACKET integer_value RBRACKET
+    (60) AFF_COND_EXP -> . AFF_COND_DEB EXPR COMMA
+    (66) IF_CONDITION -> . IF LPAREN EXPR RPAREN
+    (69) ELSE_IF_CONDITION -> . ELSE_IF LPAREN EXPR RPAREN NEWLINE
+    (72) WHILE_START -> . WHILE
+    (75) FOR_START -> . FOR LPAREN IDF IN for_int COLON
+    (61) AFF_COND_DEB -> . IDF EQUAL LPAREN EXPR COMMA
+    (68) ELSE_IF -> . IF_INSTRUCTION NEWLINE ELSE IF
+
+    COMMENT         shift and go to state 13
+    IDF             shift and go to state 21
+    INTEGER         shift and go to state 27
+    NUMERIC         shift and go to state 28
+    CHARACTER       shift and go to state 29
+    LOGICAL         shift and go to state 30
+    IF              shift and go to state 32
+    WHILE           shift and go to state 34
+    FOR             shift and go to state 35
+
+    IF_CONDITION                   shift and go to state 23
+    INSTRUCTION_BLOCK              shift and go to state 150
+    INST                           shift and go to state 4
+    IF_CLAUSE                      shift and go to state 5
+    WHILE_INSTRUCTION              shift and go to state 6
+    FOR_INSTRUCTION                shift and go to state 7
+    DECLARATION                    shift and go to state 8
+    AFFECT                         shift and go to state 9
+    AFFECT_COND                    shift and go to state 10
+    INCR                           shift and go to state 11
+    DECR                           shift and go to state 12
+    IF_INSTRUCTION                 shift and go to state 14
+    IF_ELSE_BLOC                   shift and go to state 15
+    WHILE_COND                     shift and go to state 16
+    FOR_CONDITION                  shift and go to state 17
+    TYPE                           shift and go to state 18
+    DECLARATION_MULTIPLE           shift and go to state 19
+    ARRAY_DECLARATION              shift and go to state 20
+    AFF_COND_EXP                   shift and go to state 22
+    ELSE_IF_CONDITION              shift and go to state 24
+    WHILE_START                    shift and go to state 25
+    FOR_START                      shift and go to state 26
+    AFF_COND_DEB                   shift and go to state 31
+    ELSE_IF                        shift and go to state 33
+
+state 137
+
+    (65) IF_INSTRUCTION -> ELSE_IF_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK . RACCO
+    (3) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK . INST NEWLINE
+    (8) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK . IF_CLAUSE
+    (9) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK . WHILE_INSTRUCTION
+    (10) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK . FOR_INSTRUCTION
+    (11) INST -> . DECLARATION
+    (12) INST -> . AFFECT
+    (13) INST -> . AFFECT_COND
+    (14) INST -> . INCR
+    (15) INST -> . DECR
+    (16) INST -> . COMMENT
+    (62) IF_CLAUSE -> . IF_INSTRUCTION NEWLINE
+    (63) IF_CLAUSE -> . IF_ELSE_BLOC INSTRUCTION_BLOCK RACCO NEWLINE
+    (70) WHILE_INSTRUCTION -> . WHILE_COND LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+    (73) FOR_INSTRUCTION -> . FOR_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+    (21) DECLARATION -> . TYPE AFFECT
+    (22) DECLARATION -> . DECLARATION_MULTIPLE
+    (25) DECLARATION -> . ARRAY_DECLARATION
+    (19) AFFECT -> . IDF EQUAL EXPR
+    (20) AFFECT -> . IDF EQUAL character_value
+    (59) AFFECT_COND -> . AFF_COND_EXP EXPR RPAREN
+    (17) INCR -> . IDF INC integer_value
+    (18) DECR -> . IDF DEC integer_value
+    (64) IF_INSTRUCTION -> . IF_CONDITION NEWLINE LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+    (65) IF_INSTRUCTION -> . ELSE_IF_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+    (67) IF_ELSE_BLOC -> . IF_INSTRUCTION NEWLINE ELSE NEWLINE LACCO NEWLINE
+    (71) WHILE_COND -> . WHILE_START LPAREN EXPR RPAREN NEWLINE
+    (74) FOR_CONDITION -> . FOR_START for_int RPAREN NEWLINE
+    (27) TYPE -> . INTEGER
+    (28) TYPE -> . NUMERIC
+    (29) TYPE -> . CHARACTER
+    (30) TYPE -> . LOGICAL
+    (23) DECLARATION_MULTIPLE -> . TYPE IDF
+    (24) DECLARATION_MULTIPLE -> . DECLARATION_MULTIPLE COMMA IDF
+    (26) ARRAY_DECLARATION -> . TYPE IDF LBRACKET integer_value RBRACKET
+    (60) AFF_COND_EXP -> . AFF_COND_DEB EXPR COMMA
+    (66) IF_CONDITION -> . IF LPAREN EXPR RPAREN
+    (69) ELSE_IF_CONDITION -> . ELSE_IF LPAREN EXPR RPAREN NEWLINE
+    (72) WHILE_START -> . WHILE
+    (75) FOR_START -> . FOR LPAREN IDF IN for_int COLON
+    (61) AFF_COND_DEB -> . IDF EQUAL LPAREN EXPR COMMA
+    (68) ELSE_IF -> . IF_INSTRUCTION NEWLINE ELSE IF
+
+    RACCO           shift and go to state 151
+    COMMENT         shift and go to state 13
+    IDF             shift and go to state 21
+    INTEGER         shift and go to state 27
+    NUMERIC         shift and go to state 28
+    CHARACTER       shift and go to state 29
+    LOGICAL         shift and go to state 30
+    IF              shift and go to state 32
+    WHILE           shift and go to state 34
+    FOR             shift and go to state 35
+
+    ELSE_IF_CONDITION              shift and go to state 24
+    INST                           shift and go to state 36
+    IF_CLAUSE                      shift and go to state 37
+    WHILE_INSTRUCTION              shift and go to state 38
+    FOR_INSTRUCTION                shift and go to state 39
+    DECLARATION                    shift and go to state 8
+    AFFECT                         shift and go to state 9
+    AFFECT_COND                    shift and go to state 10
+    INCR                           shift and go to state 11
+    DECR                           shift and go to state 12
+    IF_INSTRUCTION                 shift and go to state 14
+    IF_ELSE_BLOC                   shift and go to state 15
+    WHILE_COND                     shift and go to state 16
+    FOR_CONDITION                  shift and go to state 17
+    TYPE                           shift and go to state 18
+    DECLARATION_MULTIPLE           shift and go to state 19
+    ARRAY_DECLARATION              shift and go to state 20
+    AFF_COND_EXP                   shift and go to state 22
+    IF_CONDITION                   shift and go to state 23
+    WHILE_START                    shift and go to state 25
+    FOR_START                      shift and go to state 26
+    AFF_COND_DEB                   shift and go to state 31
+    ELSE_IF                        shift and go to state 33
+
+state 138
+
+    (71) WHILE_COND -> WHILE_START LPAREN EXPR RPAREN . NEWLINE
+
+    NEWLINE         shift and go to state 152
+
+
+state 139
+
+    (74) FOR_CONDITION -> FOR_START for_int RPAREN NEWLINE .
+
+    LACCO           reduce using rule 74 (FOR_CONDITION -> FOR_START for_int RPAREN NEWLINE .)
+
+
+state 140
+
+    (66) IF_CONDITION -> IF LPAREN EXPR RPAREN .
+
+    NEWLINE         reduce using rule 66 (IF_CONDITION -> IF LPAREN EXPR RPAREN .)
+
+
+state 141
+
+    (69) ELSE_IF_CONDITION -> ELSE_IF LPAREN EXPR RPAREN . NEWLINE
+
+    NEWLINE         shift and go to state 153
+
+
+state 142
+
+    (75) FOR_START -> FOR LPAREN IDF IN . for_int COLON
+    (76) for_int -> . IDF
+    (77) for_int -> . integer_value
+
+    IDF             shift and go to state 68
+    integer_value   shift and go to state 69
+
+    for_int                        shift and go to state 154
+
+state 143
+
+    (67) IF_ELSE_BLOC -> IF_INSTRUCTION NEWLINE ELSE NEWLINE LACCO . NEWLINE
+
+    NEWLINE         shift and go to state 155
+
+
+state 144
+
+    (70) WHILE_INSTRUCTION -> WHILE_COND LACCO NEWLINE INSTRUCTION_BLOCK RACCO . NEWLINE
+
+    NEWLINE         shift and go to state 156
+
+
+state 145
+
+    (73) FOR_INSTRUCTION -> FOR_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO . NEWLINE
+
+    NEWLINE         shift and go to state 157
+
+
+state 146
+
+    (26) ARRAY_DECLARATION -> TYPE IDF LBRACKET integer_value RBRACKET .
+
+    NEWLINE         reduce using rule 26 (ARRAY_DECLARATION -> TYPE IDF LBRACKET integer_value RBRACKET .)
+
+
+state 147
+
+    (61) AFF_COND_DEB -> IDF EQUAL LPAREN EXPR COMMA .
+
+    IDF             reduce using rule 61 (AFF_COND_DEB -> IDF EQUAL LPAREN EXPR COMMA .)
+    LPAREN          reduce using rule 61 (AFF_COND_DEB -> IDF EQUAL LPAREN EXPR COMMA .)
+    integer_value   reduce using rule 61 (AFF_COND_DEB -> IDF EQUAL LPAREN EXPR COMMA .)
+    numeric_value   reduce using rule 61 (AFF_COND_DEB -> IDF EQUAL LPAREN EXPR COMMA .)
+    TRUE            reduce using rule 61 (AFF_COND_DEB -> IDF EQUAL LPAREN EXPR COMMA .)
+    FALSE           reduce using rule 61 (AFF_COND_DEB -> IDF EQUAL LPAREN EXPR COMMA .)
+
+
+state 148
+
+    (42) ARITHMETICAL_EXPRESSION -> LPAREN ARITHMETICAL_EXPRESSION . RPAREN
+    (34) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . ADD ARITHMETICAL_EXPRESSION
+    (35) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . SUB ARITHMETICAL_EXPRESSION
+    (36) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . MUL ARITHMETICAL_EXPRESSION
+    (37) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . DIV ARITHMETICAL_EXPRESSION
+    (38) ARITHMETICAL_EXPRESSION -> ARITHMETICAL_EXPRESSION . MOD ARITHMETICAL_EXPRESSION
+
+    RPAREN          shift and go to state 133
+    ADD             shift and go to state 90
+    SUB             shift and go to state 91
+    MUL             shift and go to state 92
+    DIV             shift and go to state 93
+    MOD             shift and go to state 94
+
+
+state 149
+
+    (41) ARITHMETICAL_EXPRESSION -> IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET .
+
+    ADD             reduce using rule 41 (ARITHMETICAL_EXPRESSION -> IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET .)
+    SUB             reduce using rule 41 (ARITHMETICAL_EXPRESSION -> IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET .)
+    MUL             reduce using rule 41 (ARITHMETICAL_EXPRESSION -> IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET .)
+    DIV             reduce using rule 41 (ARITHMETICAL_EXPRESSION -> IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET .)
+    MOD             reduce using rule 41 (ARITHMETICAL_EXPRESSION -> IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET .)
+    SUP             reduce using rule 41 (ARITHMETICAL_EXPRESSION -> IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET .)
+    INF             reduce using rule 41 (ARITHMETICAL_EXPRESSION -> IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET .)
+    SUPEQUAL        reduce using rule 41 (ARITHMETICAL_EXPRESSION -> IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET .)
+    INFEQUAL        reduce using rule 41 (ARITHMETICAL_EXPRESSION -> IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET .)
+    EEQUAL          reduce using rule 41 (ARITHMETICAL_EXPRESSION -> IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET .)
+    NOTEQUAL        reduce using rule 41 (ARITHMETICAL_EXPRESSION -> IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET .)
+    RPAREN          reduce using rule 41 (ARITHMETICAL_EXPRESSION -> IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET .)
+    AND             reduce using rule 41 (ARITHMETICAL_EXPRESSION -> IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET .)
+    OR              reduce using rule 41 (ARITHMETICAL_EXPRESSION -> IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET .)
+    COMMA           reduce using rule 41 (ARITHMETICAL_EXPRESSION -> IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET .)
+    NEWLINE         reduce using rule 41 (ARITHMETICAL_EXPRESSION -> IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET .)
+    RBRACKET        reduce using rule 41 (ARITHMETICAL_EXPRESSION -> IDF LBRACKET ARITHMETICAL_EXPRESSION RBRACKET .)
+
+
+state 150
+
+    (64) IF_INSTRUCTION -> IF_CONDITION NEWLINE LACCO NEWLINE INSTRUCTION_BLOCK . RACCO
+    (3) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK . INST NEWLINE
+    (8) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK . IF_CLAUSE
+    (9) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK . WHILE_INSTRUCTION
+    (10) INSTRUCTION_BLOCK -> INSTRUCTION_BLOCK . FOR_INSTRUCTION
+    (11) INST -> . DECLARATION
+    (12) INST -> . AFFECT
+    (13) INST -> . AFFECT_COND
+    (14) INST -> . INCR
+    (15) INST -> . DECR
+    (16) INST -> . COMMENT
+    (62) IF_CLAUSE -> . IF_INSTRUCTION NEWLINE
+    (63) IF_CLAUSE -> . IF_ELSE_BLOC INSTRUCTION_BLOCK RACCO NEWLINE
+    (70) WHILE_INSTRUCTION -> . WHILE_COND LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+    (73) FOR_INSTRUCTION -> . FOR_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE
+    (21) DECLARATION -> . TYPE AFFECT
+    (22) DECLARATION -> . DECLARATION_MULTIPLE
+    (25) DECLARATION -> . ARRAY_DECLARATION
+    (19) AFFECT -> . IDF EQUAL EXPR
+    (20) AFFECT -> . IDF EQUAL character_value
+    (59) AFFECT_COND -> . AFF_COND_EXP EXPR RPAREN
+    (17) INCR -> . IDF INC integer_value
+    (18) DECR -> . IDF DEC integer_value
+    (64) IF_INSTRUCTION -> . IF_CONDITION NEWLINE LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+    (65) IF_INSTRUCTION -> . ELSE_IF_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO
+    (67) IF_ELSE_BLOC -> . IF_INSTRUCTION NEWLINE ELSE NEWLINE LACCO NEWLINE
+    (71) WHILE_COND -> . WHILE_START LPAREN EXPR RPAREN NEWLINE
+    (74) FOR_CONDITION -> . FOR_START for_int RPAREN NEWLINE
+    (27) TYPE -> . INTEGER
+    (28) TYPE -> . NUMERIC
+    (29) TYPE -> . CHARACTER
+    (30) TYPE -> . LOGICAL
+    (23) DECLARATION_MULTIPLE -> . TYPE IDF
+    (24) DECLARATION_MULTIPLE -> . DECLARATION_MULTIPLE COMMA IDF
+    (26) ARRAY_DECLARATION -> . TYPE IDF LBRACKET integer_value RBRACKET
+    (60) AFF_COND_EXP -> . AFF_COND_DEB EXPR COMMA
+    (66) IF_CONDITION -> . IF LPAREN EXPR RPAREN
+    (69) ELSE_IF_CONDITION -> . ELSE_IF LPAREN EXPR RPAREN NEWLINE
+    (72) WHILE_START -> . WHILE
+    (75) FOR_START -> . FOR LPAREN IDF IN for_int COLON
+    (61) AFF_COND_DEB -> . IDF EQUAL LPAREN EXPR COMMA
+    (68) ELSE_IF -> . IF_INSTRUCTION NEWLINE ELSE IF
+
+    RACCO           shift and go to state 158
+    COMMENT         shift and go to state 13
+    IDF             shift and go to state 21
+    INTEGER         shift and go to state 27
+    NUMERIC         shift and go to state 28
+    CHARACTER       shift and go to state 29
+    LOGICAL         shift and go to state 30
+    IF              shift and go to state 32
+    WHILE           shift and go to state 34
+    FOR             shift and go to state 35
+
+    IF_CONDITION                   shift and go to state 23
+    INST                           shift and go to state 36
+    IF_CLAUSE                      shift and go to state 37
+    WHILE_INSTRUCTION              shift and go to state 38
+    FOR_INSTRUCTION                shift and go to state 39
+    DECLARATION                    shift and go to state 8
+    AFFECT                         shift and go to state 9
+    AFFECT_COND                    shift and go to state 10
+    INCR                           shift and go to state 11
+    DECR                           shift and go to state 12
+    IF_INSTRUCTION                 shift and go to state 14
+    IF_ELSE_BLOC                   shift and go to state 15
+    WHILE_COND                     shift and go to state 16
+    FOR_CONDITION                  shift and go to state 17
+    TYPE                           shift and go to state 18
+    DECLARATION_MULTIPLE           shift and go to state 19
+    ARRAY_DECLARATION              shift and go to state 20
+    AFF_COND_EXP                   shift and go to state 22
+    ELSE_IF_CONDITION              shift and go to state 24
+    WHILE_START                    shift and go to state 25
+    FOR_START                      shift and go to state 26
+    AFF_COND_DEB                   shift and go to state 31
+    ELSE_IF                        shift and go to state 33
+
+state 151
+
+    (65) IF_INSTRUCTION -> ELSE_IF_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO .
+
+    NEWLINE         reduce using rule 65 (IF_INSTRUCTION -> ELSE_IF_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO .)
+
+
+state 152
+
+    (71) WHILE_COND -> WHILE_START LPAREN EXPR RPAREN NEWLINE .
+
+    LACCO           reduce using rule 71 (WHILE_COND -> WHILE_START LPAREN EXPR RPAREN NEWLINE .)
+
+
+state 153
+
+    (69) ELSE_IF_CONDITION -> ELSE_IF LPAREN EXPR RPAREN NEWLINE .
+
+    LACCO           reduce using rule 69 (ELSE_IF_CONDITION -> ELSE_IF LPAREN EXPR RPAREN NEWLINE .)
+
+
+state 154
+
+    (75) FOR_START -> FOR LPAREN IDF IN for_int . COLON
+
+    COLON           shift and go to state 159
+
+
+state 155
+
+    (67) IF_ELSE_BLOC -> IF_INSTRUCTION NEWLINE ELSE NEWLINE LACCO NEWLINE .
+
+    COMMENT         reduce using rule 67 (IF_ELSE_BLOC -> IF_INSTRUCTION NEWLINE ELSE NEWLINE LACCO NEWLINE .)
+    IDF             reduce using rule 67 (IF_ELSE_BLOC -> IF_INSTRUCTION NEWLINE ELSE NEWLINE LACCO NEWLINE .)
+    INTEGER         reduce using rule 67 (IF_ELSE_BLOC -> IF_INSTRUCTION NEWLINE ELSE NEWLINE LACCO NEWLINE .)
+    NUMERIC         reduce using rule 67 (IF_ELSE_BLOC -> IF_INSTRUCTION NEWLINE ELSE NEWLINE LACCO NEWLINE .)
+    CHARACTER       reduce using rule 67 (IF_ELSE_BLOC -> IF_INSTRUCTION NEWLINE ELSE NEWLINE LACCO NEWLINE .)
+    LOGICAL         reduce using rule 67 (IF_ELSE_BLOC -> IF_INSTRUCTION NEWLINE ELSE NEWLINE LACCO NEWLINE .)
+    IF              reduce using rule 67 (IF_ELSE_BLOC -> IF_INSTRUCTION NEWLINE ELSE NEWLINE LACCO NEWLINE .)
+    WHILE           reduce using rule 67 (IF_ELSE_BLOC -> IF_INSTRUCTION NEWLINE ELSE NEWLINE LACCO NEWLINE .)
+    FOR             reduce using rule 67 (IF_ELSE_BLOC -> IF_INSTRUCTION NEWLINE ELSE NEWLINE LACCO NEWLINE .)
+
+
+state 156
+
+    (70) WHILE_INSTRUCTION -> WHILE_COND LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE .
+
+    COMMENT         reduce using rule 70 (WHILE_INSTRUCTION -> WHILE_COND LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE .)
+    IDF             reduce using rule 70 (WHILE_INSTRUCTION -> WHILE_COND LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE .)
+    INTEGER         reduce using rule 70 (WHILE_INSTRUCTION -> WHILE_COND LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE .)
+    NUMERIC         reduce using rule 70 (WHILE_INSTRUCTION -> WHILE_COND LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE .)
+    CHARACTER       reduce using rule 70 (WHILE_INSTRUCTION -> WHILE_COND LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE .)
+    LOGICAL         reduce using rule 70 (WHILE_INSTRUCTION -> WHILE_COND LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE .)
+    IF              reduce using rule 70 (WHILE_INSTRUCTION -> WHILE_COND LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE .)
+    WHILE           reduce using rule 70 (WHILE_INSTRUCTION -> WHILE_COND LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE .)
+    FOR             reduce using rule 70 (WHILE_INSTRUCTION -> WHILE_COND LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE .)
+    $end            reduce using rule 70 (WHILE_INSTRUCTION -> WHILE_COND LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE .)
+    RACCO           reduce using rule 70 (WHILE_INSTRUCTION -> WHILE_COND LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE .)
+
+
+state 157
+
+    (73) FOR_INSTRUCTION -> FOR_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE .
+
+    COMMENT         reduce using rule 73 (FOR_INSTRUCTION -> FOR_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE .)
+    IDF             reduce using rule 73 (FOR_INSTRUCTION -> FOR_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE .)
+    INTEGER         reduce using rule 73 (FOR_INSTRUCTION -> FOR_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE .)
+    NUMERIC         reduce using rule 73 (FOR_INSTRUCTION -> FOR_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE .)
+    CHARACTER       reduce using rule 73 (FOR_INSTRUCTION -> FOR_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE .)
+    LOGICAL         reduce using rule 73 (FOR_INSTRUCTION -> FOR_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE .)
+    IF              reduce using rule 73 (FOR_INSTRUCTION -> FOR_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE .)
+    WHILE           reduce using rule 73 (FOR_INSTRUCTION -> FOR_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE .)
+    FOR             reduce using rule 73 (FOR_INSTRUCTION -> FOR_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE .)
+    $end            reduce using rule 73 (FOR_INSTRUCTION -> FOR_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE .)
+    RACCO           reduce using rule 73 (FOR_INSTRUCTION -> FOR_CONDITION LACCO NEWLINE INSTRUCTION_BLOCK RACCO NEWLINE .)
+
+
+state 158
+
+    (64) IF_INSTRUCTION -> IF_CONDITION NEWLINE LACCO NEWLINE INSTRUCTION_BLOCK RACCO .
+
+    NEWLINE         reduce using rule 64 (IF_INSTRUCTION -> IF_CONDITION NEWLINE LACCO NEWLINE INSTRUCTION_BLOCK RACCO .)
+
+
+state 159
+
+    (75) FOR_START -> FOR LPAREN IDF IN for_int COLON .
+
+    IDF             reduce using rule 75 (FOR_START -> FOR LPAREN IDF IN for_int COLON .)
+    integer_value   reduce using rule 75 (FOR_START -> FOR LPAREN IDF IN for_int COLON .)
+
